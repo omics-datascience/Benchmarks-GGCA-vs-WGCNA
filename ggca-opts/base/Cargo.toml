@@ -1,0 +1,47 @@
+[package]
+authors = ["JWare Solutions <jware.organization@gmail.com>"]
+description = "Computes efficiently the correlation (Pearson, Spearman or Kendall) and the p-value (two-sided) between all the pairs from two datasets"
+documentation = "https://docs.rs/ggca/"
+edition = "2018"
+keywords = ["mRNA", "expression", "modulation", "correlation", "p-value"]
+license = "GPL-3.0"
+name = "ggca"
+version = "0.4.1"
+repository = "https://github.com/jware-solutions/ggca"
+readme = "README.md"
+exclude = [".*", "*.tar.gz", "*.sh"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "ggca"
+
+[dependencies]
+GSL = "2.0.1"
+bincode = "1.3.1"
+csv = "1.1"
+extsort = "0.4.2"
+fast-float = "0.2"
+itertools = "0.9.0"
+kendalls = "0.2.1"
+pyo3 = "0.15.1"
+lazy_static = "1.4.0"
+serde = {version = "1.0.14", default-features = false}
+serde_derive = {version = "1.0.14", default-features = false}
+log = "0.4.14"
+env_logger = "0.9.0"
+
+[dev-dependencies]
+approx = "0.5.0"
+criterion = "0.3.5"
+
+[[bench]]
+name = "benchmarks"
+harness = false
+
+[features]
+# This prevent errors with get/set macro
+# Read this https://github.com/PyO3/pyo3/issues/1084
+# Solved using this: https://pyo3.rs/master/faq.html#i-cant-run-cargo-test-im-having-linker-issues-like-symbol-not-found-or-undefined-reference-to-_pyexc_systemerror
+# It will be fixed once https://github.com/PyO3/pyo3/pull/1123 is merged
+default = ["extension-module"]
+extension-module = ["pyo3/extension-module"]

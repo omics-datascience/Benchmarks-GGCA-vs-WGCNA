@@ -1,0 +1,329 @@
+2 100
+opt-1, single-pearson: Testing T=2
+Finished in 4253 ms, 0 of 1002819 combinations evaluated
+Finished in 4243 ms, 0 of 1002819 combinations evaluated
+Finished in 4237 ms, 0 of 1002819 combinations evaluated
+Finished in 4251 ms, 0 of 1002819 combinations evaluated
+Finished in 4277 ms, 0 of 1002819 combinations evaluated
+Finished in 4284 ms, 0 of 1002819 combinations evaluated
+Finished in 4277 ms, 0 of 1002819 combinations evaluated
+Finished in 4248 ms, 0 of 1002819 combinations evaluated
+Finished in 4246 ms, 0 of 1002819 combinations evaluated
+Finished in 4262 ms, 0 of 1002819 combinations evaluated
+opt-2, single-pearson: Testing T=2
+Finished in 4158 ms, 0 of 1002819 combinations evaluated
+Finished in 4163 ms, 0 of 1002819 combinations evaluated
+Finished in 4157 ms, 0 of 1002819 combinations evaluated
+Finished in 4161 ms, 0 of 1002819 combinations evaluated
+Finished in 4150 ms, 0 of 1002819 combinations evaluated
+Finished in 4151 ms, 0 of 1002819 combinations evaluated
+Finished in 4174 ms, 0 of 1002819 combinations evaluated
+Finished in 4146 ms, 0 of 1002819 combinations evaluated
+Finished in 4149 ms, 0 of 1002819 combinations evaluated
+Finished in 4165 ms, 0 of 1002819 combinations evaluated
+opt-3, single-pearson: Testing T=2
+Finished in 4173 ms, 0 of 1002819 combinations evaluated
+Finished in 4157 ms, 0 of 1002819 combinations evaluated
+Finished in 4148 ms, 0 of 1002819 combinations evaluated
+Finished in 4151 ms, 0 of 1002819 combinations evaluated
+Finished in 4144 ms, 0 of 1002819 combinations evaluated
+Finished in 4129 ms, 0 of 1002819 combinations evaluated
+Finished in 4134 ms, 0 of 1002819 combinations evaluated
+Finished in 4131 ms, 0 of 1002819 combinations evaluated
+Finished in 4148 ms, 0 of 1002819 combinations evaluated
+Finished in 4138 ms, 0 of 1002819 combinations evaluated
+opt-4, single-pearson: Testing T=2
+Finished in 3773 ms, 0 of 1002819 combinations evaluated
+Finished in 3765 ms, 0 of 1002819 combinations evaluated
+Finished in 3805 ms, 0 of 1002819 combinations evaluated
+Finished in 3786 ms, 0 of 1002819 combinations evaluated
+Finished in 3787 ms, 0 of 1002819 combinations evaluated
+Finished in 3773 ms, 0 of 1002819 combinations evaluated
+Finished in 3774 ms, 0 of 1002819 combinations evaluated
+Finished in 3805 ms, 0 of 1002819 combinations evaluated
+Finished in 3817 ms, 0 of 1002819 combinations evaluated
+Finished in 3768 ms, 0 of 1002819 combinations evaluated
+opt-7, single-pearson: Testing T=2
+Finished in 2145 ms, 0 of 1002819 combinations evaluated
+Finished in 2130 ms, 0 of 1002819 combinations evaluated
+Finished in 2121 ms, 0 of 1002819 combinations evaluated
+Finished in 2126 ms, 0 of 1002819 combinations evaluated
+Finished in 2123 ms, 0 of 1002819 combinations evaluated
+Finished in 2119 ms, 0 of 1002819 combinations evaluated
+Finished in 2125 ms, 0 of 1002819 combinations evaluated
+Finished in 2122 ms, 0 of 1002819 combinations evaluated
+Finished in 2131 ms, 0 of 1002819 combinations evaluated
+Finished in 2129 ms, 0 of 1002819 combinations evaluated
+opt-1, single-kendalls: Testing T=2
+Finished in 42990 ms, 0 of 1002819 combinations evaluated
+Finished in 43219 ms, 0 of 1002819 combinations evaluated
+Finished in 43181 ms, 0 of 1002819 combinations evaluated
+Finished in 43232 ms, 0 of 1002819 combinations evaluated
+Finished in 43116 ms, 0 of 1002819 combinations evaluated
+Finished in 43276 ms, 0 of 1002819 combinations evaluated
+Finished in 43245 ms, 0 of 1002819 combinations evaluated
+Finished in 43212 ms, 0 of 1002819 combinations evaluated
+Finished in 43190 ms, 0 of 1002819 combinations evaluated
+Finished in 43470 ms, 0 of 1002819 combinations evaluated
+opt-2, single-kendalls: Testing T=2
+Finished in 45250 ms, 0 of 1002819 combinations evaluated
+Finished in 43884 ms, 0 of 1002819 combinations evaluated
+Finished in 44117 ms, 0 of 1002819 combinations evaluated
+Finished in 43521 ms, 0 of 1002819 combinations evaluated
+Finished in 43682 ms, 0 of 1002819 combinations evaluated
+Finished in 43608 ms, 0 of 1002819 combinations evaluated
+Finished in 43907 ms, 0 of 1002819 combinations evaluated
+Finished in 43620 ms, 0 of 1002819 combinations evaluated
+Finished in 43517 ms, 0 of 1002819 combinations evaluated
+Finished in 43452 ms, 0 of 1002819 combinations evaluated
+opt-3, single-kendalls: Testing T=2
+Finished in 41575 ms, 0 of 1002819 combinations evaluated
+Finished in 41305 ms, 0 of 1002819 combinations evaluated
+Finished in 41527 ms, 0 of 1002819 combinations evaluated
+Finished in 41284 ms, 0 of 1002819 combinations evaluated
+Finished in 41524 ms, 0 of 1002819 combinations evaluated
+Finished in 41509 ms, 0 of 1002819 combinations evaluated
+Finished in 41430 ms, 0 of 1002819 combinations evaluated
+Finished in 41113 ms, 0 of 1002819 combinations evaluated
+Finished in 41186 ms, 0 of 1002819 combinations evaluated
+Finished in 41761 ms, 0 of 1002819 combinations evaluated
+opt-4, single-kendalls: Testing T=2
+Finished in 42999 ms, 0 of 1002819 combinations evaluated
+Finished in 43373 ms, 0 of 1002819 combinations evaluated
+Finished in 43533 ms, 0 of 1002819 combinations evaluated
+Finished in 43303 ms, 0 of 1002819 combinations evaluated
+Finished in 43316 ms, 0 of 1002819 combinations evaluated
+Finished in 43304 ms, 0 of 1002819 combinations evaluated
+Finished in 42951 ms, 0 of 1002819 combinations evaluated
+Finished in 43238 ms, 0 of 1002819 combinations evaluated
+Finished in 43111 ms, 0 of 1002819 combinations evaluated
+Finished in 43122 ms, 0 of 1002819 combinations evaluated
+opt-5, single-kendalls: Testing T=2
+Finished in 42378 ms, 0 of 1002819 combinations evaluated
+Finished in 42547 ms, 0 of 1002819 combinations evaluated
+Finished in 42545 ms, 0 of 1002819 combinations evaluated
+Finished in 42482 ms, 0 of 1002819 combinations evaluated
+Finished in 42603 ms, 0 of 1002819 combinations evaluated
+Finished in 42562 ms, 0 of 1002819 combinations evaluated
+Finished in 42335 ms, 0 of 1002819 combinations evaluated
+Finished in 42457 ms, 0 of 1002819 combinations evaluated
+Finished in 42723 ms, 0 of 1002819 combinations evaluated
+Finished in 42611 ms, 0 of 1002819 combinations evaluated
+opt-6, single-kendalls: Testing T=2
+Finished in 40937 ms, 0 of 1002819 combinations evaluated
+Finished in 40700 ms, 0 of 1002819 combinations evaluated
+Finished in 40966 ms, 0 of 1002819 combinations evaluated
+Finished in 40453 ms, 0 of 1002819 combinations evaluated
+Finished in 40995 ms, 0 of 1002819 combinations evaluated
+Finished in 40923 ms, 0 of 1002819 combinations evaluated
+Finished in 40854 ms, 0 of 1002819 combinations evaluated
+Finished in 41050 ms, 0 of 1002819 combinations evaluated
+Finished in 41038 ms, 0 of 1002819 combinations evaluated
+Finished in 40821 ms, 0 of 1002819 combinations evaluated
+opt-1, single-spearman: Testing T=2
+Finished in 52847 ms, 1 of 1002819 combinations evaluated
+Finished in 53331 ms, 1 of 1002819 combinations evaluated
+Finished in 53156 ms, 1 of 1002819 combinations evaluated
+Finished in 52896 ms, 1 of 1002819 combinations evaluated
+Finished in 52983 ms, 1 of 1002819 combinations evaluated
+Finished in 53251 ms, 1 of 1002819 combinations evaluated
+Finished in 52931 ms, 1 of 1002819 combinations evaluated
+Finished in 53313 ms, 1 of 1002819 combinations evaluated
+Finished in 52971 ms, 1 of 1002819 combinations evaluated
+Finished in 52979 ms, 1 of 1002819 combinations evaluated
+opt-2, single-spearman: Testing T=2
+Finished in 53159 ms, 1 of 1002819 combinations evaluated
+Finished in 53494 ms, 1 of 1002819 combinations evaluated
+Finished in 52946 ms, 1 of 1002819 combinations evaluated
+Finished in 53061 ms, 1 of 1002819 combinations evaluated
+Finished in 53135 ms, 1 of 1002819 combinations evaluated
+Finished in 53931 ms, 1 of 1002819 combinations evaluated
+Finished in 53692 ms, 1 of 1002819 combinations evaluated
+Finished in 53545 ms, 1 of 1002819 combinations evaluated
+Finished in 53078 ms, 1 of 1002819 combinations evaluated
+Finished in 53214 ms, 1 of 1002819 combinations evaluated
+opt-3, single-spearman: Testing T=2
+Finished in 53742 ms, 1 of 1002819 combinations evaluated
+Finished in 53356 ms, 1 of 1002819 combinations evaluated
+Finished in 52995 ms, 1 of 1002819 combinations evaluated
+Finished in 52992 ms, 1 of 1002819 combinations evaluated
+Finished in 53194 ms, 1 of 1002819 combinations evaluated
+Finished in 53065 ms, 1 of 1002819 combinations evaluated
+Finished in 53170 ms, 1 of 1002819 combinations evaluated
+Finished in 53604 ms, 1 of 1002819 combinations evaluated
+Finished in 53333 ms, 1 of 1002819 combinations evaluated
+Finished in 54514 ms, 1 of 1002819 combinations evaluated
+opt-4, single-spearman: Testing T=2
+Finished in 54202 ms, 1 of 1002819 combinations evaluated
+Finished in 53809 ms, 1 of 1002819 combinations evaluated
+Finished in 53496 ms, 1 of 1002819 combinations evaluated
+Finished in 53405 ms, 1 of 1002819 combinations evaluated
+Finished in 53178 ms, 1 of 1002819 combinations evaluated
+Finished in 52752 ms, 1 of 1002819 combinations evaluated
+Finished in 53542 ms, 1 of 1002819 combinations evaluated
+Finished in 53406 ms, 1 of 1002819 combinations evaluated
+Finished in 53248 ms, 1 of 1002819 combinations evaluated
+Finished in 53388 ms, 1 of 1002819 combinations evaluated
+2 500
+opt-1, single-pearson: Testing T=2
+Finished in 22435 ms, 2 of 5014259 combinations evaluated
+Finished in 22408 ms, 2 of 5014259 combinations evaluated
+Finished in 22382 ms, 2 of 5014259 combinations evaluated
+Finished in 22343 ms, 2 of 5014259 combinations evaluated
+Finished in 22333 ms, 2 of 5014259 combinations evaluated
+Finished in 22433 ms, 2 of 5014259 combinations evaluated
+Finished in 22304 ms, 2 of 5014259 combinations evaluated
+Finished in 22408 ms, 2 of 5014259 combinations evaluated
+Finished in 22384 ms, 2 of 5014259 combinations evaluated
+Finished in 22364 ms, 2 of 5014259 combinations evaluated
+opt-2, single-pearson: Testing T=2
+Finished in 22284 ms, 2 of 5014259 combinations evaluated
+Finished in 22251 ms, 2 of 5014259 combinations evaluated
+Finished in 22180 ms, 2 of 5014259 combinations evaluated
+Finished in 22235 ms, 2 of 5014259 combinations evaluated
+Finished in 22278 ms, 2 of 5014259 combinations evaluated
+Finished in 22372 ms, 2 of 5014259 combinations evaluated
+Finished in 22132 ms, 2 of 5014259 combinations evaluated
+Finished in 22183 ms, 2 of 5014259 combinations evaluated
+Finished in 22215 ms, 2 of 5014259 combinations evaluated
+Finished in 22620 ms, 2 of 5014259 combinations evaluated
+opt-3, single-pearson: Testing T=2
+Finished in 21772 ms, 2 of 5014259 combinations evaluated
+Finished in 21827 ms, 2 of 5014259 combinations evaluated
+Finished in 21889 ms, 2 of 5014259 combinations evaluated
+Finished in 21756 ms, 2 of 5014259 combinations evaluated
+Finished in 21784 ms, 2 of 5014259 combinations evaluated
+Finished in 21849 ms, 2 of 5014259 combinations evaluated
+Finished in 22008 ms, 2 of 5014259 combinations evaluated
+Finished in 21782 ms, 2 of 5014259 combinations evaluated
+Finished in 21813 ms, 2 of 5014259 combinations evaluated
+Finished in 21825 ms, 2 of 5014259 combinations evaluated
+opt-4, single-pearson: Testing T=2
+Finished in 20626 ms, 2 of 5014259 combinations evaluated
+Finished in 20655 ms, 2 of 5014259 combinations evaluated
+Finished in 20695 ms, 2 of 5014259 combinations evaluated
+Finished in 20667 ms, 2 of 5014259 combinations evaluated
+Finished in 20759 ms, 2 of 5014259 combinations evaluated
+Finished in 20724 ms, 2 of 5014259 combinations evaluated
+Finished in 20830 ms, 2 of 5014259 combinations evaluated
+Finished in 20800 ms, 2 of 5014259 combinations evaluated
+Finished in 20905 ms, 2 of 5014259 combinations evaluated
+Finished in 20671 ms, 2 of 5014259 combinations evaluated
+opt-7, single-pearson: Testing T=2
+Finished in 12688 ms, 2 of 5014259 combinations evaluated
+Finished in 12494 ms, 2 of 5014259 combinations evaluated
+Finished in 12451 ms, 2 of 5014259 combinations evaluated
+Finished in 12422 ms, 2 of 5014259 combinations evaluated
+Finished in 12614 ms, 2 of 5014259 combinations evaluated
+Finished in 12487 ms, 2 of 5014259 combinations evaluated
+Finished in 12644 ms, 2 of 5014259 combinations evaluated
+Finished in 12422 ms, 2 of 5014259 combinations evaluated
+Finished in 12515 ms, 2 of 5014259 combinations evaluated
+Finished in 12441 ms, 2 of 5014259 combinations evaluated
+opt-1, single-kendalls: Testing T=2
+Finished in 216616 ms, 0 of 5014259 combinations evaluated
+Finished in 216314 ms, 0 of 5014259 combinations evaluated
+Finished in 216292 ms, 0 of 5014259 combinations evaluated
+Finished in 216610 ms, 0 of 5014259 combinations evaluated
+Finished in 216818 ms, 0 of 5014259 combinations evaluated
+Finished in 216982 ms, 0 of 5014259 combinations evaluated
+Finished in 216423 ms, 0 of 5014259 combinations evaluated
+Finished in 217557 ms, 0 of 5014259 combinations evaluated
+Finished in 217047 ms, 0 of 5014259 combinations evaluated
+Finished in 217178 ms, 0 of 5014259 combinations evaluated
+opt-2, single-kendalls: Testing T=2
+Finished in 219251 ms, 0 of 5014259 combinations evaluated
+Finished in 217594 ms, 0 of 5014259 combinations evaluated
+Finished in 218118 ms, 0 of 5014259 combinations evaluated
+Finished in 218861 ms, 0 of 5014259 combinations evaluated
+Finished in 218198 ms, 0 of 5014259 combinations evaluated
+Finished in 217355 ms, 0 of 5014259 combinations evaluated
+Finished in 217921 ms, 0 of 5014259 combinations evaluated
+Finished in 219145 ms, 0 of 5014259 combinations evaluated
+Finished in 217318 ms, 0 of 5014259 combinations evaluated
+Finished in 218316 ms, 0 of 5014259 combinations evaluated
+opt-3, single-kendalls: Testing T=2
+Finished in 206617 ms, 0 of 5014259 combinations evaluated
+Finished in 206413 ms, 0 of 5014259 combinations evaluated
+Finished in 205798 ms, 0 of 5014259 combinations evaluated
+Finished in 205904 ms, 0 of 5014259 combinations evaluated
+Finished in 206576 ms, 0 of 5014259 combinations evaluated
+Finished in 207337 ms, 0 of 5014259 combinations evaluated
+Finished in 215401 ms, 0 of 5014259 combinations evaluated
+Finished in 206818 ms, 0 of 5014259 combinations evaluated
+Finished in 207666 ms, 0 of 5014259 combinations evaluated
+Finished in 207836 ms, 0 of 5014259 combinations evaluated
+opt-4, single-kendalls: Testing T=2
+Finished in 214916 ms, 0 of 5014259 combinations evaluated
+Finished in 215942 ms, 0 of 5014259 combinations evaluated
+Finished in 215352 ms, 0 of 5014259 combinations evaluated
+Finished in 215584 ms, 0 of 5014259 combinations evaluated
+Finished in 215847 ms, 0 of 5014259 combinations evaluated
+Finished in 216205 ms, 0 of 5014259 combinations evaluated
+Finished in 215353 ms, 0 of 5014259 combinations evaluated
+Finished in 215915 ms, 0 of 5014259 combinations evaluated
+Finished in 215853 ms, 0 of 5014259 combinations evaluated
+Finished in 215768 ms, 0 of 5014259 combinations evaluated
+opt-5, single-kendalls: Testing T=2
+Finished in 211378 ms, 0 of 5014259 combinations evaluated
+Finished in 211713 ms, 0 of 5014259 combinations evaluated
+Finished in 211630 ms, 0 of 5014259 combinations evaluated
+Finished in 212439 ms, 0 of 5014259 combinations evaluated
+Finished in 210707 ms, 0 of 5014259 combinations evaluated
+Finished in 210169 ms, 0 of 5014259 combinations evaluated
+Finished in 211353 ms, 0 of 5014259 combinations evaluated
+Finished in 211874 ms, 0 of 5014259 combinations evaluated
+Finished in 211653 ms, 0 of 5014259 combinations evaluated
+Finished in 211549 ms, 0 of 5014259 combinations evaluated
+opt-6, single-kendalls: Testing T=2
+Finished in 204423 ms, 0 of 5014259 combinations evaluated
+Finished in 204496 ms, 0 of 5014259 combinations evaluated
+Finished in 204831 ms, 0 of 5014259 combinations evaluated
+Finished in 204315 ms, 0 of 5014259 combinations evaluated
+Finished in 204430 ms, 0 of 5014259 combinations evaluated
+Finished in 204587 ms, 0 of 5014259 combinations evaluated
+Finished in 203781 ms, 0 of 5014259 combinations evaluated
+Finished in 204872 ms, 0 of 5014259 combinations evaluated
+Finished in 204579 ms, 0 of 5014259 combinations evaluated
+Finished in 204979 ms, 0 of 5014259 combinations evaluated
+opt-1, single-spearman: Testing T=2
+Finished in 262751 ms, 6 of 5014259 combinations evaluated
+Finished in 262527 ms, 6 of 5014259 combinations evaluated
+Finished in 262759 ms, 6 of 5014259 combinations evaluated
+Finished in 262817 ms, 6 of 5014259 combinations evaluated
+Finished in 262641 ms, 6 of 5014259 combinations evaluated
+Finished in 262916 ms, 6 of 5014259 combinations evaluated
+Finished in 262683 ms, 6 of 5014259 combinations evaluated
+Finished in 263107 ms, 6 of 5014259 combinations evaluated
+Finished in 263587 ms, 6 of 5014259 combinations evaluated
+Finished in 263074 ms, 6 of 5014259 combinations evaluated
+opt-2, single-spearman: Testing T=2
+Finished in 269643 ms, 6 of 5014259 combinations evaluated
+Finished in 308591 ms, 6 of 5014259 combinations evaluated
+Finished in 319505 ms, 6 of 5014259 combinations evaluated
+Finished in 314229 ms, 6 of 5014259 combinations evaluated
+Finished in 300994 ms, 6 of 5014259 combinations evaluated
+Finished in 312080 ms, 6 of 5014259 combinations evaluated
+Finished in 264452 ms, 6 of 5014259 combinations evaluated
+Finished in 263199 ms, 6 of 5014259 combinations evaluated
+Finished in 264267 ms, 6 of 5014259 combinations evaluated
+Finished in 264236 ms, 6 of 5014259 combinations evaluated
+opt-3, single-spearman: Testing T=2
+Finished in 262629 ms, 6 of 5014259 combinations evaluated
+Finished in 263884 ms, 6 of 5014259 combinations evaluated
+Finished in 263544 ms, 6 of 5014259 combinations evaluated
+Finished in 268316 ms, 6 of 5014259 combinations evaluated
+Finished in 267444 ms, 6 of 5014259 combinations evaluated
+Finished in 267421 ms, 6 of 5014259 combinations evaluated
+Finished in 267532 ms, 6 of 5014259 combinations evaluated
+Finished in 266839 ms, 6 of 5014259 combinations evaluated
+Finished in 267635 ms, 6 of 5014259 combinations evaluated
+Finished in 263802 ms, 6 of 5014259 combinations evaluated
+opt-4, single-spearman: Testing T=2
+Finished in 266105 ms, 6 of 5014259 combinations evaluated
+Finished in 266111 ms, 6 of 5014259 combinations evaluated
+Finished in 266282 ms, 6 of 5014259 combinations evaluated
+Finished in 265505 ms, 6 of 5014259 combinations evaluated
+Finished in 265792 ms, 6 of 5014259 combinations evaluated
+Finished in 265861 ms, 6 of 5014259 combinations evaluated
+Finished in 265792 ms, 6 of 5014259 combinations evaluated
