@@ -49,7 +49,8 @@ fn main() -> PyResult<()> {
     } */
 
     println!(
-        "Finished in {} ms, {} of {} combinations evaluated",
+        "single-spearman\topt-7\t{}\t{}\t{}/{}",
+        threads,
         milliseconds,
         result.len(),
         number_of_combinations_evaluated
