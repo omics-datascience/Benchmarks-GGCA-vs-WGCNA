@@ -7,7 +7,7 @@
 PROGRAM_NAME=single-spearman
 
  # Run tests
-for VERSION in base opt-1 opt-2 opt-3 opt-4
+for VERSION in opt-1 opt-2 opt-3 opt-4
 do
 	# echo "$VERSION, $PROGRAM_NAME: Testing T=$3"
 	cd $VERSION

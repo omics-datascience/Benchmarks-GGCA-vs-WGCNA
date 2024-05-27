@@ -1,13 +1,13 @@
 #!/bin/bash
 REPETITIONS=1
 
-for THREAD in 8
+for THREAD in 6 8
 do
-    for DATASET in 100
+    for DATASET in 100 500
     do
         cd ggca-opts
         echo "#Dataset" $DATASET "MB - " $THREAD Threads
-        echo "Algorithm Optimization    Threads Finished time (ms)  Combinations evaluated" >"../$DATASET-$THREAD.tsv"
+        echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET-$THREAD.tsv"
         echo "Corriendo Pearson..."
         bash run_pearson.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
         echo "Corriendo Kendalls..."
@@ -33,7 +33,7 @@ for archivo in "${archivos[@]}"; do
   
   while IFS= read -r line; do
     if [[ $header_written == false ]]; then
-      echo -e "${primer_string}\t${line}" >> "$output"
+      echo -e "Dataset\t${line}" >> "$output"
       header_written=true
     else
       if [[ $line != $(head -n 1 "$archivo") ]]; then
