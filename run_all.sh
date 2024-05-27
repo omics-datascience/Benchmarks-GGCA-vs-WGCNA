@@ -1,7 +1,7 @@
 #!/bin/bash
 REPETITIONS=1
 
-for THREAD in 6 8
+for THREAD in 8
 do
     for DATASET in 100
     do
@@ -18,6 +18,8 @@ do
     done
 done
 
+
+# ARMO RESULTADOS EN TSV ORDENADO
 output="resultados.tsv"
 > "$output"
 
@@ -39,4 +41,5 @@ for archivo in "${archivos[@]}"; do
       fi
     fi
   done < "$archivo"
+  rm -f $archivo
 done

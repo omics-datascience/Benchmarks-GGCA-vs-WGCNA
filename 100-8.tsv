@@ -1,0 +1,4 @@
+Algorithm Optimization    Threads Finished time (ms)  Combinations evaluated
+single-pearson	opt-1	8	2395	0/1002819
+single-pearson	opt-2	8	2446	0/1002819
+single-pearson	opt-3	8	2302	0/1002819
