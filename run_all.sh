@@ -1,9 +1,9 @@
 #!/bin/bash
-REPETITIONS=1
+REPETITIONS=5
 
-for THREAD in 6 8
+for THREAD in 2 4 6 8
 do
-    for DATASET in 100 500
+    for DATASET in 5 20 50
     do
         cd ggca-opts
         echo "#Dataset" $DATASET "MB - " $THREAD Threads
@@ -19,7 +19,7 @@ do
 done
 
 
-# ARMO RESULTADOS EN TSV ORDENADO
+# ARMO RESULTADOS EN UN UNICO TSV ORDENADO
 output="resultados.tsv"
 > "$output"
 
@@ -43,3 +43,6 @@ for archivo in "${archivos[@]}"; do
   done < "$archivo"
   rm -f $archivo
 done
+
+# GENERO LOS GRAFICOS
+python3 graficar_resultados.py $output

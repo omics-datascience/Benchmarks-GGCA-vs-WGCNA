@@ -10,9 +10,11 @@ fn main() -> PyResult<()> {
 
     // Datasets's paths
 	let args: Vec<String> = env::args().collect();
-	
+    let threads: usize = (&args[1]).parse().expect("T expected");
+    rayon::ThreadPoolBuilder::new().num_threads(threads).build_global().unwrap();
+
     let gene_file_path = "tests/medium_files/methylation_gene.csv".to_string();
-    let gem_file_path = (&args[1]).to_string();
+    let gem_file_path = (&args[2]).to_string();
 
     // Some parameters
     let gem_contains_cpg = false;
@@ -46,9 +48,10 @@ fn main() -> PyResult<()> {
         println!("{}", cor_p_value);
     } */
 
-    println!("Finished in -> {} ms", milliseconds);
     println!(
-        "Number of elements -> {} of {} combinations evaluated",
+        "single-kendalls\tbase\t{}\t{}\t{}/{}",
+        threads,
+        milliseconds,
         result.len(),
         number_of_combinations_evaluated
     );
