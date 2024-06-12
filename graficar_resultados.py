@@ -190,7 +190,7 @@ def compare_optimizations_Algorithm(grouped_data):
                     subset = subset_algorithm[(subset_algorithm['Threads'] == thread) & (subset_algorithm['Dataset'] == dataset)]
                     
                     if not subset.empty:
-                        sns.barplot(x='Optimization', y='Finished time (ms)', data=subset, label=f'Threads {thread} - Dataset {dataset}', palette="viridis")
+                        sns.barplot(x='Optimization', y='Finished time (ms)', hue='Optimization', legend=False, data=subset, label=f'Threads {thread} - Dataset {dataset}', palette="viridis")
             plt.title(f'Algorithm: {algorithm}')
             plt.xlabel('Optimization')
             plt.ylabel('Finished time (ms)')
