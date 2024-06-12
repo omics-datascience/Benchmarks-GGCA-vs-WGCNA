@@ -142,7 +142,7 @@ def compare_optimizations_datasets(grouped_data):
                 guardar_grafico(plt, filename)
 
 
-def compare_optimizations_Algorithm(grouped_data):
+def compare_optimizations_all_algorithms(grouped_data):
     """ Crea graficas para comparar optimizaciones según los algoritmos """
     unique_threads = grouped_data['Threads'].unique()
     unique_datasets = grouped_data['Dataset'].unique()
@@ -171,8 +171,39 @@ def compare_optimizations_Algorithm(grouped_data):
                 filename = f'{directorio}/threads_{thread}_dataset_{dataset}_comparison_algorithm.png'
                 guardar_grafico(plt, filename)
 
+
+def compare_optimizations_Algorithm(grouped_data):
+    """ Crea gráficas individuales para comparar optimizaciones según los algoritmos. """
+    unique_threads = grouped_data['Threads'].unique()
+    unique_datasets = grouped_data['Dataset'].unique()
+    unique_algorithms = grouped_data['Algorithm'].unique()
+    directorio = "graficos/comparacion_por_algoritmos_individuales"
+    os.makedirs(directorio, exist_ok=True)
+
+    for algorithm in unique_algorithms:
+        subset_algorithm = grouped_data[grouped_data['Algorithm'] == algorithm]
+        
+        if not subset_algorithm.empty:
+            plt.figure(figsize=(14, 8))
+            for thread in unique_threads:
+                for dataset in unique_datasets:
+                    subset = subset_algorithm[(subset_algorithm['Threads'] == thread) & (subset_algorithm['Dataset'] == dataset)]
+                    
+                    if not subset.empty:
+                        sns.barplot(x='Optimization', y='Finished time (ms)', data=subset, label=f'Threads {thread} - Dataset {dataset}', palette="viridis")
+            plt.title(f'Algorithm: {algorithm}')
+            plt.xlabel('Optimization')
+            plt.ylabel('Finished time (ms)')
+            plt.xticks(rotation=45)
+            plt.legend(title='Threads and Datasets', bbox_to_anchor=(1.05, 1), loc='upper left')
+            plt.tight_layout()
+            
+            filename = f'{directorio}/algorithm_{algorithm}_comparison.png'
+            guardar_grafico(plt, filename)
+
 create_individual_benchmark_boxplots_times(data)
 create_individual_benchmark_violinplots_times(data)
 compare_optimizations_threads(data)
 compare_optimizations_datasets(grouped_data)
+compare_optimizations_all_algorithms(grouped_data)
 compare_optimizations_Algorithm(grouped_data)

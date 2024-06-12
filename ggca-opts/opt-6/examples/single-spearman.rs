@@ -30,7 +30,7 @@ fn main() -> PyResult<()> {
         gem_file_path,
         gem_contains_cpg,
         correlation_method: CorrelationMethod::Spearman,
-        correlation_threshold: 0.7,
+        correlation_threshold: 0.5,
         sort_buf_size: 2_000_000,
         adjustment_method: AdjustmentMethod::BenjaminiHochberg,
         is_all_vs_all,

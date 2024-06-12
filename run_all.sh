@@ -1,19 +1,22 @@
 #!/bin/bash
-REPETITIONS=5
+REPETITIONS=3
 
-for THREAD in 2 4 6 8
+for THREAD in 6 8
 do
-    for DATASET in 5 20 50
+    for DATASET in 5 20
     do
         cd ggca-opts
         echo "#Dataset" $DATASET "MB - " $THREAD Threads
         echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET-$THREAD.tsv"
         echo "Corriendo Pearson..."
         bash run_pearson.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
+        Rscript wgcna/wgcna.r $REPETITIONS $DATASET $THREAD pearson >>"../$DATASET-$THREAD.tsv"
         echo "Corriendo Kendalls..."
         bash run_kendalls.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
+        Rscript wgcna/wgcna.r $REPETITIONS $DATASET $THREAD kendall >>"../$DATASET-$THREAD.tsv"
         echo "Corriendo Spearman..."
         bash run_spearman.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
+        Rscript wgcna/wgcna.r $REPETITIONS $DATASET $THREAD spearman >>"../$DATASET-$THREAD.tsv"
         cd ..
     done
 done
