@@ -81,6 +81,24 @@ unnecessary_output <- capture.output({
 
 # Calcular correlaciones 
 for (rep in 1:repeticiones) {
+  ptm <- NULL
+  correlation.start <- NULL
+  methyl.dataset.transposed <- NULL
+  mirna.dataset.transposed <- NULL
+  methyl.dataset.transposed.numeric <- NULL
+  mirna.dataset.transposed.numeric <- NULL
+  cor.and.pvalue <- NULL
+  numCorrelations <- NULL
+  numGoodCorrelations <- NULL
+  cor.melt <- NULL
+  p.melt <- NULL
+  padj.melt <- NULL
+  all.p.values <- NULL
+  temp.table <- NULL
+  result.table <- NULL
+  resultado <- NULL
+  tiempo_transcurrido <- NULL
+
   ptm <- proc.time()
   # Calculate correlation between x and y using  WCGNA
   correlation.start <- proc.time()

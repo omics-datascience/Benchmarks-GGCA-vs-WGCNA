@@ -38,7 +38,7 @@ fn main() -> PyResult<()> {
         keep_top_n,
     };
 
-    let (result, _total_combinations_count, number_of_combinations_evaluated) =
+    let (_result, _total_combinations_count, number_of_combinations_evaluated) =
         analysis.compute()?;
 
     let milliseconds = now.elapsed().as_millis();
@@ -52,7 +52,7 @@ fn main() -> PyResult<()> {
         "single-pearson\topt-4\t{}\t{}\t{}/{}",
         threads,
         milliseconds,
-        result.len(),
+        _total_combinations_count,
         number_of_combinations_evaluated
     );
 

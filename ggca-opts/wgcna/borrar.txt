@@ -1,6 +1,0 @@
-[1] "Reading methylation file..."
-[1] "Reading the mirna file..."
-[1] "Sorting the mirna data..."
-Allowing parallel execution with up to 8 working processes.
-Dataset	Algorithm	Optimization	Threads	Finished time (ms)	Combinations evaluated 
-20	pearson	NA	8	1534	NA 
