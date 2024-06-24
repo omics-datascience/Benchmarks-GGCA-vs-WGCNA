@@ -21,3 +21,9 @@ do
 
 	cd ../
 done
+
+# Run WGCNA
+for ((i=1; i<=$1; i++))
+do
+    Rscript --vanilla wgcna/wgcna.r $2 $3 $PROGRAM_NAME
+done

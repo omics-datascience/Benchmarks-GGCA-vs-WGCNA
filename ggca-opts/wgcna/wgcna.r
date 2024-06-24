@@ -4,24 +4,24 @@ suppressMessages({
   library("data.table")
 })
 
-# Arg 1: number of repetitions
-# Arg 2: dataset size in MB (100, 500 or 1500)
-# Arg 3: number of threads
-# Arg 4: metodo (pearson, spearman or kendall)
+# Arg 1: dataset size in MB (100, 500 or 1500)
+# Arg 2: number of threads
+# Arg 3: metodo (pearson, spearman or kendall)
 
 args <- commandArgs(trailingOnly = TRUE)
 
-repeticiones = as.numeric(args[[1]])
-dataset = args[[2]]
-threads = as.numeric(args[[3]])
-metodo = args[[4]]
+dataset = args[[1]]
+threads = as.numeric(args[[2]])
+metodo = args[[3]]
 
-if( metodo == "pearson" ){
-  metodo_output = "single-pearson"
-} else if (metodo == "spearman"){
-  metodo_output = "single-spearman"
-} else{
-  metodo_output = "single-kendalls"
+if(args[[3]] == "single-pearson"){
+  metodo = "pearson"
+} else if (args[[3]] == "single-kendalls") {
+   metodo = "kendall"
+} else if (args[[3]] == "single-spearman") {
+   metodo = "spearman"
+} else {
+  cat("args[[3]] should be one of “single-pearson”, “single-kendalls” or “single-spearman”")
 }
 
 # Correlation_threshold or r.minimium value
@@ -80,68 +80,48 @@ unnecessary_output <- capture.output({
 # cat(paste("Dataset", "Algorithm", "Optimization", "Threads", "Finished time (ms)", "Combinations evaluated",sep="\t"), "\n")
 
 # Calcular correlaciones 
-for (rep in 1:repeticiones) {
-  ptm <- NULL
-  correlation.start <- NULL
-  methyl.dataset.transposed <- NULL
-  mirna.dataset.transposed <- NULL
-  methyl.dataset.transposed.numeric <- NULL
-  mirna.dataset.transposed.numeric <- NULL
-  cor.and.pvalue <- NULL
-  numCorrelations <- NULL
-  numGoodCorrelations <- NULL
-  cor.melt <- NULL
-  p.melt <- NULL
-  padj.melt <- NULL
-  all.p.values <- NULL
-  temp.table <- NULL
-  result.table <- NULL
-  resultado <- NULL
-  tiempo_transcurrido <- NULL
+ptm <- proc.time()
+# Calculate correlation between x and y using  WCGNA
+correlation.start <- proc.time()
+# transpose matrix before correlation
+methyl.dataset.transposed <-t(methyl.dataset)
+mirna.dataset.transposed <- t(mirna.dataset)
 
-  ptm <- proc.time()
-  # Calculate correlation between x and y using  WCGNA
-  correlation.start <- proc.time()
-  # transpose matrix before correlation
-  methyl.dataset.transposed <-t(methyl.dataset)
-  mirna.dataset.transposed <- t(mirna.dataset)
+methyl.dataset.transposed.numeric<-apply(methyl.dataset.transposed, 2, as.numeric)
+mirna.dataset.transposed.numeric<-apply(mirna.dataset.transposed, 2, as.numeric)
 
-  methyl.dataset.transposed.numeric<-apply(methyl.dataset.transposed, 2, as.numeric)
-  mirna.dataset.transposed.numeric<-apply(mirna.dataset.transposed, 2, as.numeric)
+cor.and.pvalue <- corAndPvalue(methyl.dataset.transposed.numeric, mirna.dataset.transposed.numeric, method=metodo)
 
-  cor.and.pvalue <- corAndPvalue(methyl.dataset.transposed.numeric, mirna.dataset.transposed.numeric, method=metodo)
-  
-  # obtengo numero de correlaciones calculadas
-  numCorrelations <- length(cor.and.pvalue$cor)
+# obtengo numero de correlaciones calculadas
+numCorrelations <- length(cor.and.pvalue$cor)
 
-  # correlation result into a dataframe
-  cor.melt<-reshape2::melt(cor.and.pvalue$cor)
-  colnames(cor.melt) <- c("x","y","correlation")
-  # Filter rows with a correlation that does not meet the minimum required value
-  cor.melt <- subset(cor.melt, abs(correlation) > r.minimium)
+# correlation result into a dataframe
+cor.melt<-reshape2::melt(cor.and.pvalue$cor)
+colnames(cor.melt) <- c("x","y","correlation")
+# Filter rows with a correlation that does not meet the minimum required value
+cor.melt <- subset(cor.melt, abs(correlation) > r.minimium)
 
-  # obtengo numero de correlaciones que pasan el umbral seteado
-  numGoodCorrelations <- length(cor.melt$correlation)
+# obtengo numero de correlaciones que pasan el umbral seteado
+numGoodCorrelations <- length(cor.melt$correlation)
 
-  #pvalue result into a dataframe
-  p.melt<-reshape2::melt(cor.and.pvalue$p)
-  colnames(p.melt) <- c("x","y","p.value")
+#pvalue result into a dataframe
+p.melt<-reshape2::melt(cor.and.pvalue$p)
+colnames(p.melt) <- c("x","y","p.value")
 
-  padj.melt<-p.melt
-  all.p.values<-p.melt[,3]
-  padj.melt[,3] = p.adjust(all.p.values, length(all.p.values), method = metodo_ajuste)
-  colnames(padj.melt) <- c("x","y", paste("p.value.",metodo_ajuste,".adjusted",sep=""))
+padj.melt<-p.melt
+all.p.values<-p.melt[,3]
+padj.melt[,3] = p.adjust(all.p.values, length(all.p.values), method = metodo_ajuste)
+colnames(padj.melt) <- c("x","y", paste("p.value.",metodo_ajuste,".adjusted",sep=""))
 
-  # Merge all three previos tables into a single dataframe.
-  # Transform data.frame's to data.table's to improve merge performance. Once the merge is done, transform back to data.frame,
-  # as the caller code needs a data.frame to work
-  temp.table <- merge(as.data.table(cor.melt), as.data.table(p.melt), by=c("x","y"))
-  result.table <-merge(temp.table, as.data.table(padj.melt),  by=c("x","y"))
+# Merge all three previos tables into a single dataframe.
+# Transform data.frame's to data.table's to improve merge performance. Once the merge is done, transform back to data.frame,
+# as the caller code needs a data.frame to work
+temp.table <- merge(as.data.table(cor.melt), as.data.table(p.melt), by=c("x","y"))
+result.table <-merge(temp.table, as.data.table(padj.melt),  by=c("x","y"))
 
-  # Mantengo en los resultados las mejores N correlaciones
-  resultado <- result.table[order(-correlation)][1:keep_top_n]
-  
-  # Tiempo de collelacion y de ajuste:
-  tiempo_transcurrido = (proc.time() - correlation.start)["elapsed"] * 1000
-  cat(paste(metodo_output, "R_WGCNA", threads, tiempo_transcurrido, paste(numGoodCorrelations,"/",numCorrelations, sep="") ,sep="\t"), "\n")
-}
+# Mantengo en los resultados las mejores N correlaciones
+resultado <- result.table[order(-correlation)][1:keep_top_n]
+
+# Tiempo de collelacion y de ajuste:
+tiempo_transcurrido = (proc.time() - correlation.start)["elapsed"] * 1000
+cat(paste(metodo, "R_WGCNA", threads, tiempo_transcurrido, paste(numGoodCorrelations,"/",numCorrelations, sep="") ,sep="\t"), "\n")

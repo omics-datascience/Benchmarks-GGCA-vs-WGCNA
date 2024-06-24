@@ -1,7 +1,7 @@
 #!/bin/bash
-REPETITIONS=3
+REPETITIONS=5
 
-for THREAD in 8 6
+for THREAD in 6 8
 do
     for DATASET in 5 20
     do
@@ -10,13 +10,10 @@ do
         echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET-$THREAD.tsv"
         echo "Corriendo Pearson..."
         bash run_pearson.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
-        Rscript --vanilla wgcna/wgcna.r $REPETITIONS $DATASET $THREAD pearson >>"../$DATASET-$THREAD.tsv"
         echo "Corriendo Kendalls..."
         bash run_kendalls.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
-        Rscript --vanilla wgcna/wgcna.r $REPETITIONS $DATASET $THREAD kendall >>"../$DATASET-$THREAD.tsv"
         echo "Corriendo Spearman..."
         bash run_spearman.sh $REPETITIONS $DATASET $THREAD >>"../$DATASET-$THREAD.tsv"
-        Rscript --vanilla wgcna/wgcna.r $REPETITIONS $DATASET $THREAD spearman >>"../$DATASET-$THREAD.tsv"
         cd ..
     done
 done
