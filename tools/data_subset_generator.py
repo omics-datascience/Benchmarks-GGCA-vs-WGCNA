@@ -8,7 +8,6 @@ parser.add_argument('--output_file', type=str, required=True, help='El nombre de
 parser.add_argument('--size_mb', type=int, required=True, help='El tamaño en MB del data subset de salida')
 parser.add_argument('--sample_size', type=int, required=False, default=50, help='El tamaño en MB del data subset de salida')
 
-
 args = parser.parse_args()
 
 df = pd.read_csv(args.input_file, sep='\t')
