@@ -32,16 +32,22 @@ metodo_ajuste="fdr"
 keep_top_n=10
 
 # Utils
-readGeneExpressionFile <- function(gene.file, ncol.for.expression.id=1) {
-  gene <- na.omit(read.table(gene.file, header=TRUE, fill=TRUE, sep="\t",check.names=F))  
-  gene <-SortMatrixByColumnName(gene, 1)
-  return (gene)
-}  
+# readGeneExpressionFile <- function(gene.file, ncol.for.expression.id=1) {
+#   gene <- na.omit(read.table(gene.file, header=TRUE, fill=TRUE, sep="\t",check.names=F))  
+#   gene <-SortMatrixByColumnName(gene, 1)
+#   return (gene)
+# }  
 
-readMethylationFile <- function(meth.path, ncol.for.expression.id=1) {
-  meth <- na.omit(read.table(meth.path, header=TRUE,fill=TRUE, row.names = NULL, sep="\t", check.names=F))
-  meth <-SortMatrixByColumnName(meth, 1)
-  return (meth)
+# readMethylationFile <- function(meth.path, ncol.for.expression.id=1) {
+#   meth <- na.omit(read.table(meth.path, header=TRUE,fill=TRUE, row.names = NULL, sep="\t", check.names=F))
+#   meth <-SortMatrixByColumnName(meth, 1)
+#   return (meth)
+# }
+
+readFile <- function(file_path) {
+  file <- na.omit(read.table(file_path, header=TRUE,fill=TRUE, row.names = NULL, sep="\t", check.names=F))
+  file <-SortMatrixByColumnName(file, 1)
+  return (file)
 }
 
 keepSameColumns <- function(matrix1, matrix2) {
@@ -56,14 +62,14 @@ SortMatrixByColumnName <- function(x, colsToExclude=0){
 }
 
 # Carga datasets
-dataset1.methylation.path<-"opt-1/tests/medium_files/methylation_gene.csv"
-dataset2.gene.path<-paste("../datasets/gem-",dataset,"mb.csv", sep="")
+# dataset1.methylation.path<-"opt-1/tests/medium_files/methylation_gene.csv"
+# dataset2.gene.path<-paste("../datasets/gem-",dataset,"mb.csv", sep="")
 
-# dataset1.methylation.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_methylation_hm27.txt"
-# dataset2.gene.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt"
+dataset1.methylation.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_methylation_hm27.txt"
+dataset2.gene.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples_repaired.txt"
 
-methyl.dataset <- readMethylationFile(dataset1.methylation.path)
-gene.dataset <- readGeneExpressionFile(dataset2.gene.path)
+methyl.dataset <- readFile(dataset1.methylation.path)
+gene.dataset <- readFile(dataset2.gene.path)
 
 #Keep columns which are in both databases
 intersection<-keepSameColumns(methyl.dataset, gene.dataset)
@@ -76,10 +82,10 @@ methyl.dataset<-methyl.dataset[,2:ncol(methyl.dataset)]
 gene.dataset<-gene.dataset[,2:ncol(gene.dataset)]
 
 ### Enable parallel processing for WCGNA Correlation
-# unnecessary_output <- capture.output({
-#   enableWGCNAThreads(threads)
-# })
-th = enableWGCNAThreads(threads)
+unnecessary_output <- capture.output({
+  th = enableWGCNAThreads(threads)
+})
+
 
 # cat(paste("Dataset", "Algorithm", "Optimization", "Threads", "Finished time (ms)", "Combinations evaluated",sep="\t"), "\n")
 

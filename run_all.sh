@@ -1,9 +1,11 @@
 #!/bin/bash
 REPETITIONS=5
+THREADS=(6 8)
+DATASETS=(5 20)
 
-for THREAD in 6 8
+for THREAD in "${THREADS[@]}"
 do
-    for DATASET in 5 20
+    for DATASET in "${DATASETS[@]}"
     do
         cd ggca-opts
         echo "#Dataset" $DATASET "MB - " $THREAD Threads
@@ -45,4 +47,4 @@ for archivo in "${archivos[@]}"; do
 done
 
 # GENERO LOS GRAFICOS
-python3 graficar_resultados.py $output
+python3 tools/graficar_resultados.py $output
