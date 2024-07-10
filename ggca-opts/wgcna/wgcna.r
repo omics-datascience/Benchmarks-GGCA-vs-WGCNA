@@ -32,10 +32,10 @@ metodo_ajuste="fdr"
 keep_top_n=10
 
 # Utils
-readMirnaExpressionFile <- function(mirna.file, ncol.for.expression.id=1) {
-  mirna <- na.omit(read.table(mirna.file, header=TRUE, fill=TRUE, sep="\t",check.names=F))  
-  mirna <-SortMatrixByColumnName(mirna, 1)
-  return (mirna)
+readGeneExpressionFile <- function(gene.file, ncol.for.expression.id=1) {
+  gene <- na.omit(read.table(gene.file, header=TRUE, fill=TRUE, sep="\t",check.names=F))  
+  gene <-SortMatrixByColumnName(gene, 1)
+  return (gene)
 }  
 
 readMethylationFile <- function(meth.path, ncol.for.expression.id=1) {
@@ -57,25 +57,29 @@ SortMatrixByColumnName <- function(x, colsToExclude=0){
 
 # Carga datasets
 dataset1.methylation.path<-"opt-1/tests/medium_files/methylation_gene.csv"
-dataset2.mirna.path<-paste("../datasets/gem-",dataset,"mb.csv", sep="")
+dataset2.gene.path<-paste("../datasets/gem-",dataset,"mb.csv", sep="")
+
+# dataset1.methylation.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_methylation_hm27.txt"
+# dataset2.gene.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt"
 
 methyl.dataset <- readMethylationFile(dataset1.methylation.path)
-mirna.dataset <- readMirnaExpressionFile(dataset2.mirna.path)
+gene.dataset <- readGeneExpressionFile(dataset2.gene.path)
 
 #Keep columns which are in both databases
-intersection<-keepSameColumns(methyl.dataset, mirna.dataset)
+intersection<-keepSameColumns(methyl.dataset, gene.dataset)
 methyl.dataset<-(intersection[[1]])
-mirna.dataset<-(intersection[[2]])
+gene.dataset<-(intersection[[2]])
 
 row.names(methyl.dataset)<-methyl.dataset[,1]
-row.names(mirna.dataset)<-mirna.dataset[,1]
+row.names(gene.dataset)<-gene.dataset[,1]
 methyl.dataset<-methyl.dataset[,2:ncol(methyl.dataset)]
-mirna.dataset<-mirna.dataset[,2:ncol(mirna.dataset)]
+gene.dataset<-gene.dataset[,2:ncol(gene.dataset)]
 
 ### Enable parallel processing for WCGNA Correlation
-unnecessary_output <- capture.output({
-  enableWGCNAThreads(threads)
-})
+# unnecessary_output <- capture.output({
+#   enableWGCNAThreads(threads)
+# })
+th = enableWGCNAThreads(threads)
 
 # cat(paste("Dataset", "Algorithm", "Optimization", "Threads", "Finished time (ms)", "Combinations evaluated",sep="\t"), "\n")
 
@@ -85,12 +89,12 @@ ptm <- proc.time()
 correlation.start <- proc.time()
 # transpose matrix before correlation
 methyl.dataset.transposed <-t(methyl.dataset)
-mirna.dataset.transposed <- t(mirna.dataset)
+gene.dataset.transposed <- t(gene.dataset)
 
-methyl.dataset.transposed.numeric<-apply(methyl.dataset.transposed, 2, as.numeric)
-mirna.dataset.transposed.numeric<-apply(mirna.dataset.transposed, 2, as.numeric)
+methyl.dataset.transposed.numeric <-apply(methyl.dataset.transposed, 2, as.numeric)
+gene.dataset.transposed.numeric <-apply(gene.dataset.transposed, 2, as.numeric)
 
-cor.and.pvalue <- corAndPvalue(methyl.dataset.transposed.numeric, mirna.dataset.transposed.numeric, method=metodo)
+cor.and.pvalue <- corAndPvalue(methyl.dataset.transposed.numeric, gene.dataset.transposed.numeric, method=metodo, nThreads=th)
 
 # obtengo numero de correlaciones calculadas
 numCorrelations <- length(cor.and.pvalue$cor)
