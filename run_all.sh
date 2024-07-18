@@ -1,6 +1,9 @@
 #!/bin/bash
-REPETITIONS=5
-THREADS=(6 8)
+# REPETITIONS=5
+# THREADS=(6 8)
+# DATASETS=(5 20)
+REPETITIONS=1
+THREADS=(8)
 DATASETS=(5 20)
 
 for THREAD in "${THREADS[@]}"
@@ -22,7 +25,7 @@ done
 
 
 # ARMO RESULTADOS EN UN UNICO TSV ORDENADO
-output="resultados.tsv"
+output="results.tsv"
 > "$output"
 
 archivos=($(ls | grep -E '[0-9]+-[0-9]+\.tsv$'))
