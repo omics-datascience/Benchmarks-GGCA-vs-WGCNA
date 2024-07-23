@@ -4,24 +4,27 @@ suppressMessages({
   library("data.table")
 })
 
-# Arg 1: dataset size in MB (100, 500 or 1500)
+# Arg 1: metodo (pearson, spearman or kendall)
 # Arg 2: number of threads
-# Arg 3: metodo (pearson, spearman or kendall)
+# Arg 3: dataset GEM
+# Arg 4: dataset GENE
 
 args <- commandArgs(trailingOnly = TRUE)
 
-dataset = args[[1]]
+metodo = args[[1]]
 threads = as.numeric(args[[2]])
-metodo = args[[3]]
+dataset1.gem.path = args[[3]]
+dataset2.gene.path = args[[4]]
 
-if(args[[3]] == "single-pearson"){
+
+if(args[[1]] == "single-pearson"){
   metodo = "pearson"
-} else if (args[[3]] == "single-kendalls") {
+} else if (args[[1]] == "single-kendalls") {
    metodo = "kendall"
-} else if (args[[3]] == "single-spearman") {
+} else if (args[[1]] == "single-spearman") {
    metodo = "spearman"
 } else {
-  cat("args[[3]] should be one of “single-pearson”, “single-kendalls” or “single-spearman”")
+  cat("args[[1]] should be one of “single-pearson”, “single-kendalls” or “single-spearman”")
 }
 
 # Correlation_threshold or r.minimium value
@@ -50,30 +53,26 @@ SortMatrixByColumnName <- function(x, colsToExclude=0){
 }
 
 # Carga datasets
-dataset1.methylation.path<-"opt-1/tests/medium_files/methylation_gene.csv"
-dataset2.gene.path<-paste("../datasets/gem-",dataset,"mb.csv", sep="")
-
-# dataset1.methylation.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_methylation_hm27.txt"
+# dataset1.gem.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_methylation_hm27.txt"
 # dataset2.gene.path<-"/home/mauri/Documentos/Multiomix/benchmarks_ggca/datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples_repaired.txt"
 
-methyl.dataset <- readFile(dataset1.methylation.path)
+gem.dataset <- readFile(dataset1.gem.path)
 gene.dataset <- readFile(dataset2.gene.path)
 
 #Keep columns which are in both databases
-intersection<-keepSameColumns(methyl.dataset, gene.dataset)
-methyl.dataset<-(intersection[[1]])
+intersection<-keepSameColumns(gem.dataset, gene.dataset)
+gem.dataset<-(intersection[[1]])
 gene.dataset<-(intersection[[2]])
 
-row.names(methyl.dataset)<-methyl.dataset[,1]
+row.names(gem.dataset)<-gem.dataset[,1]
 row.names(gene.dataset)<-gene.dataset[,1]
-methyl.dataset<-methyl.dataset[,2:ncol(methyl.dataset)]
+gem.dataset<-gem.dataset[,2:ncol(gem.dataset)]
 gene.dataset<-gene.dataset[,2:ncol(gene.dataset)]
 
 ### Enable parallel processing for WCGNA Correlation
 unnecessary_output <- capture.output({
   th = enableWGCNAThreads(threads)
 })
-
 
 # cat(paste("Dataset", "Algorithm", "Optimization", "Threads", "Finished time (ms)", "Combinations evaluated",sep="\t"), "\n")
 
@@ -82,13 +81,13 @@ ptm <- proc.time()
 # Calculate correlation between x and y using  WCGNA
 correlation.start <- proc.time()
 # transpose matrix before correlation
-methyl.dataset.transposed <-t(methyl.dataset)
+gem.dataset.transposed <-t(gem.dataset)
 gene.dataset.transposed <- t(gene.dataset)
 
-methyl.dataset.transposed.numeric <-apply(methyl.dataset.transposed, 2, as.numeric)
+gem.dataset.transposed.numeric <-apply(gem.dataset.transposed, 2, as.numeric)
 gene.dataset.transposed.numeric <-apply(gene.dataset.transposed, 2, as.numeric)
 
-cor.and.pvalue <- corAndPvalue(methyl.dataset.transposed.numeric, gene.dataset.transposed.numeric, method=metodo, nThreads=th)
+cor.and.pvalue <- corAndPvalue(gem.dataset.transposed.numeric, gene.dataset.transposed.numeric, method=metodo, nThreads=th)
 
 # obtengo numero de correlaciones calculadas
 numCorrelations <- length(cor.and.pvalue$cor)
@@ -122,4 +121,4 @@ resultado <- result.table[order(-correlation)][1:keep_top_n]
 
 # Tiempo de collelacion y de ajuste:
 tiempo_transcurrido = (proc.time() - correlation.start)["elapsed"] * 1000
-cat(paste(metodo, "R_WGCNA", threads, tiempo_transcurrido, paste(numGoodCorrelations,"/",numCorrelations, sep="") ,sep="\t"), "\n")
+cat(paste(metodo, "wgcna_R", threads, tiempo_transcurrido, paste(numGoodCorrelations,"/",numCorrelations, sep="") ,sep="\t"), "\n")

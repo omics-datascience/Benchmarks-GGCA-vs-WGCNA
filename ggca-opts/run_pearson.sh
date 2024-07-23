@@ -1,30 +1,34 @@
 #!/bin/bash
 # Arg 1: number of repetitions
-# Arg 2: dataset size in MB (100, 500 or 1500)
-# Arg 3: number of threads
+# Arg 2: number of threads
+# Arg 3: dataset 1
+# Arg 4: dataset 2
 
 # Set env variables
 PROGRAM_NAME=single-pearson
 
+REPETITIONS=$1
+THREADS=$2
+DATASET_1=$3
+DATASET_2=$4
+
  # Run GGCA tests
 for VERSION in base opt-1 opt-2 opt-3 opt-4 opt-7
 do
-	# echo "$VERSION, $PROGRAM_NAME: Testing T=$3"
 	cd $VERSION
 	cargo build --example $PROGRAM_NAME --no-default-features --release -q
 
-	for ((i=1; i<=$1; i++))
+	for ((i=1; i<=$REPETITIONS; i++))
 	do
-		./target/release/examples/$PROGRAM_NAME $3 "../../datasets/gem-$2mb.csv"
-		#cargo run --example $PROGRAM_NAME --no-default-features --release -q $4 "../gem-$3mb.csv"
+		./target/release/examples/$PROGRAM_NAME $THREADS "../../datasets/$DATASET_1" "../../datasets/$DATASET_2"
 	done
 
 	cd ../
 done
 
 # Run WGCNA
-for ((i=1; i<=$1; i++))
+for ((i=1; i<=$REPETITIONS; i++))
 do
-    Rscript --vanilla wgcna/wgcna.r $2 $3 $PROGRAM_NAME
+    Rscript --vanilla wgcna/wgcna.r $PROGRAM_NAME $THREADS "../datasets/$DATASET_1" "../datasets/$DATASET_2"
 done
 

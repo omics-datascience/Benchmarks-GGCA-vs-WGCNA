@@ -13,7 +13,7 @@ fn main() -> PyResult<()> {
     let threads: usize = (&args[1]).parse().expect("T expected");
     rayon::ThreadPoolBuilder::new().num_threads(threads).build_global().unwrap();
 
-    let gene_file_path = "tests/medium_files/methylation_gene.csv".to_string();
+    let gene_file_path = (&args[3]).to_string();
     let gem_file_path = (&args[2]).to_string();
 
     // Some parameters
@@ -49,7 +49,7 @@ fn main() -> PyResult<()> {
     } */
 
     println!(
-        "single-spearman\topt-3\t{}\t{}\t{}/{}",
+        "single-spearman\tggca_opt-3\t{}\t{}\t{}/{}",
         threads,
         milliseconds,
         _total_combinations_count,
