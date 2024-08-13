@@ -190,7 +190,7 @@ impl Analysis {
             });
             Box::new(filtered_nan)
         };
-
+        
         // Counts element for future p-value adjustment
         let (filtered, filtered_aux) = filtered.tee();
         let number_of_evaluated_combinations = filtered_aux.count();

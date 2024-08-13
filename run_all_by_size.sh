@@ -1,17 +1,16 @@
 #!/bin/bash
-REPETITIONS=2
+REPETITIONS=3
 THREADS=(8)
-DATASETS_SIZES=(5)
+# DATASETS_SIZES=(1 10 100 500 1000 1500 2000 2500)
+DATASETS_SIZES=(1 10)
 
-echo "${DATASETS_SIZES[@]}"
-
-FIXED_DATASET="methylation_gene.csv"
+FIXED_DATASET="HiSeqV2_PANCAN_procesado-5mb.tsv"
 
 for THREAD in "${THREADS[@]}"
 do
     for DATASET_SIZE in "${DATASETS_SIZES[@]}"
     do
-        DATASET="gem-${DATASET_SIZE}mb.csv"
+        DATASET="HumanMethylation450_procesado-${DATASET_SIZE}mb.tsv"
         cd ggca-opts
         echo "#Dataset" $DATASET_SIZE "MB - " $THREAD Threads
         echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET_SIZE-$THREAD.tsv"
@@ -52,6 +51,3 @@ for archivo in "${archivos[@]}"; do
   done < "$archivo"
   rm -f $archivo
 done
-
-# GENERO LOS GRAFICOS
-# python3 tools/graficar_resultados.py $output

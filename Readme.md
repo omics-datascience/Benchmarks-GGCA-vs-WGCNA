@@ -1,7 +1,41 @@
-# Benchmarks GGCA vs WGCNA
+# Benchmarks GGCA vs WGCNA vs PyWGCNA
 
-For these tests, the Breast [Invasive Carcinoma dataset (TCGA, Cell 2015)](https://www.cbioportal.org/study/summary?id=br) obtained from the Cbioportal platform was used.  
-Specifically, the files "data_methylation_hm27.txt", "data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt" and data subsets of different sizes generated from those two files were used.
+This benchmark measures the performance of 3 data correlation algorithms using transcriptomic data.
+The algorithms tested are:
+
+1. GGCA
+2. WGCNA
+3. PyWGCNA
+
+The tests consist of measuring the performance of the algorithms by measuring their calculation speed and memory usage.
+
+These measurements are obtained in two different ways:
+
+1. Using datasets of different sizes.
+2. Using datasets with different numbers of combinations evaluated by the algorithms.
+
+The datasets used and how to obtain them are described below. This is followed by a section detailing the tests performed.
+
+## Transcriptomic dataset
+
+We used real transcriptomic datasets to perform the correlations with the different algorithms. The [TCGA Breast Cancer (BRCA)](https://xenabrowser.net/datapages/?cohort=TCGA%20Breast%20Cancer%20(BRCA)&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443) data cohort obtained from UCSC XENA was used.
+Specifically, a DNA methylation dataset (identifier [TCGA.BRCA.sampleMap/HumanMethylation450](https://xenabrowser.net/datapages/?dataset=TCGA.BRCA.sampleMap%2FHumanMethylation450&host=https%3A%2F%2Ftcga.xenahubs.net&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443)) and the gene expression RNAseq dataset (identifier [TCGA.BRCA.sampleMap/HiSeqV2_PANCAN](https://xenabrowser.net/datapages/?dataset=TCGA.BRCA.sampleMap%2FHiSeqV2_PANCAN&host=https%3A%2F%2Ftcga.xenahubs.net&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443)) were used.
+
+### Downloading and processing the datasets
+
+To download and process the datasets, install the necessary python requirements (python 3.10 is required):  
+
+``` python
+pip3 install -r requirements/requirements.txt
+```
+
+Then use the following bash script to download, unzip and process the datasets:
+
+``` bash
+./get_datasets.sh
+```
+
+## Pruebas de velocidad de respuesta
 
 ## Mark symbols of repeated genes
 

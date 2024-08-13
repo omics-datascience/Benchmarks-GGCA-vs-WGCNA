@@ -25,9 +25,9 @@ fn reader_from_path(path: &str) -> PyResult<Reader<File>> {
 }
 
 pub struct LazyMatrix {
-    path: String,
-    gem_contains_cpg: bool,
-    inner: LazyMatrixInner,
+    pub path: String,
+    pub gem_contains_cpg: bool,
+    pub inner: LazyMatrixInner,
 }
 
 impl LazyMatrix {
