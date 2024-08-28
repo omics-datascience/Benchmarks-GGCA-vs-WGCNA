@@ -73,6 +73,7 @@ def sample_intersection(dataset_1_file, dataset_2_file):
     print(f"Intersection completed. {len(common_samples)} common samples found.")
     return dataset_1_filtered, dataset_2_filtered, common_samples
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Script to process datasets.")
     parser.add_argument('--dataset_1', help="TSV file of the first dataset", required=True)

@@ -1,16 +1,15 @@
 #!/bin/bash
 REPETITIONS=3
 THREADS=(8)
-# DATASETS_SIZES=(1 10 100 500 1000 1500 2000 2500)
-DATASETS_SIZES=(1 10)
+DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
 
-FIXED_DATASET="HiSeqV2_PANCAN_procesado-5mb.tsv"
+FIXED_DATASET="TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed_5MB.tsv"
 
 for THREAD in "${THREADS[@]}"
 do
     for DATASET_SIZE in "${DATASETS_SIZES[@]}"
     do
-        DATASET="HumanMethylation450_procesado-${DATASET_SIZE}mb.tsv"
+        DATASET="TCGA_BRCA_sampleMap_HumanMethylation450_clean_processed_${DATASET_SIZE}MB.tsv"
         cd ggca-opts
         echo "#Dataset" $DATASET_SIZE "MB - " $THREAD Threads
         echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET_SIZE-$THREAD.tsv"
@@ -25,9 +24,8 @@ do
 done
 
 
-# ARMO RESULTADOS EN UN UNICO TSV ORDENADO
+# RESULTS ARE COLLECTED INTO A SINGLE ORDERED TSV
 fecha_actual=$(date +%d_%m_%Y)
-
 output="results_benchmark_by_size_$fecha_actual.tsv"
 > "$output"
 

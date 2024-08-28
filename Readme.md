@@ -1,11 +1,23 @@
-# Benchmarks GGCA vs WGCNA vs PyWGCNA
+# Benchmarks GGCA vs WGCNA
 
-This benchmark measures the performance of 3 data correlation algorithms using transcriptomic data.
+- [Benchmarks GGCA vs WGCNA](#benchmarks-ggca-vs-wgcna)
+  - [Introduction](#introduction)
+  - [Transcriptomic dataset](#transcriptomic-dataset)
+    - [Downloading and processing the datasets](#downloading-and-processing-the-datasets)
+      - [Changes in datasets](#changes-in-datasets)
+  - [Description of response speed tests](#description-of-response-speed-tests)
+  - [Configure benchmarks](#configure-benchmarks)
+  - [Run Benchmarck](#run-benchmarck)
+  - [Results](#results)
+  - [Analysis of Results](#analysis-of-results)
+
+## Introduction
+
+This benchmark measures the performance of 2 data correlation algorithms using transcriptomic data.
 The algorithms tested are:
 
 1. GGCA
 2. WGCNA
-3. PyWGCNA
 
 The tests consist of measuring the performance of the algorithms by measuring their calculation speed and memory usage.
 
@@ -14,7 +26,7 @@ These measurements are obtained in two different ways:
 1. Using datasets of different sizes.
 2. Using datasets with different numbers of combinations evaluated by the algorithms.
 
-The datasets used and how to obtain them are described below. This is followed by a section detailing the tests performed.
+The datasets used and how to get them are described below. This is followed by a section detailing the tests performed.
 
 ## Transcriptomic dataset
 
@@ -35,36 +47,63 @@ Then use the following bash script to download, unzip and process the datasets:
 ./get_datasets.sh
 ```
 
-## Pruebas de velocidad de respuesta
+#### Changes in datasets
 
-## Mark symbols of repeated genes
+The above script not only downloads the datasets in TSV format, but also makes some changes to them and assembles the datasets of different sizes to be used in the benchmark tests. All the processing performed by the script is listed below:
 
-Because in the gene expression file "data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt" there are genes with repeated HUGO Symbols, the dataset was processed to add incremental suffixes to those cases. Otherwise, the WGCNA algorithm generated errors due to duplicate row names.  
-For this processing, the script *tools/add_suffix_to_duplicates_values.py* was used as follows:
+1. **Sample Intersection:**
+Identifies the common columns (samples) between the two datasets downloaded from UCSC XENA, ensuring that the first column of each file is maintained (corresponding to the gene or modulator identifier). Then, it filters the datasets so that they only contain the common columns in both final datasets.
+2. **Removal of Rows with Missing Values:**
+Removes rows in which there are missing values ​​in any of the columns.
+3. **Removal of Rows with Identical Values:**
+Removes rows where all column values ​​are identical, since they do not contribute variability (and therefore have no standard deviation).
+4. **Adding Suffixes to the First Column:**
+Adds incremental suffixes to the values ​​in the first column to ensure that each value is unique. Many times in this type of datasets we can find two identical genes since they can refer to different transcripts of the same gene. This is often a problem when performing correlation analysis since genes or expression modulators cannot be differentiated.
+5. **Truncation of Decimal Values:**
+Rounds decimal values ​​in all columns (except the first) to 4 decimal places. This is so that both datasets have the same precision.
+6. **Saving Processed Datasets:**
+Saves processed datasets in TSV files. Processing is done using the Python library called Dask and is done in parts to manage memory efficiently.
+7. **Building and Saving Datasets with the sizes to be used in the tests**
+The script also automatically builds files of different sizes. These files will be used in the benchmark.
 
-``` bash
-    python3 tools/add_suffix_to_duplicates_values.py --input_file datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt --output_file datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples_repaired.txt
-```
+## Description of response speed tests
 
-## Subset data
+For these tests, subsets of the downloaded USCS XENA datasets of different sizes are used. The datasets are created with the script mentioned in section ***.
 
-To create subsets of data of different sizes, use the "tools/data_subset_generator.py" script. This tool creates new datasets with a size specified by the "--size_mb" parameter from a dataset passed in the "--input_file" parameter, as shown below:  
+A fixed 5 MB dataset with transcription data is used and compared with datasets of different sizes with gene expression modulation data (methylation data). The sizes of these datasets are 1, 10, 100, 500, 1000, 1500 and 2000 MB.
 
-``` bash
-    python3 tools/data_subset_generator.py --input_file datasets/data_mrna_seq_v2_rsem_zscores_ref_all_samples_repaired.txt --output_file datasets/ejemplo_50mb.tsv --size_mb 50 --sample_size 10
-```
+The tests consist of running the correlations using WGCNA and different GGCA optimizations.
+Both algorithms were configured as follows:
 
-The "--output_file" parameter allows you to specify a name for the generated subset.  
-The parameter "--sample_size" is optional (the value 50 is assigned if it is not used). This value allows you to take a sample of the first N records within the input_file dataset to estimate the size per record, and in this way determine how many records are necessary to create the new dataset with the size specified in the "--size_mb" parameter.  
+- Method for adjusting p values: Benjamini and Hochberg.
+- Correlation threshold of 0.5
+- Keep only the 10 best results.
+
+The algorithms for performing the correlations were run with 3 different methods. Pearson, Kendalls and Spearman methods were used.
+
+The resulting times were measured in milliseconds and include the time taken to perform the correlations, to adjust the p values, to apply the correlation threshold and to retain the 10 best results.
 
 ## Configure benchmarks
 
-Edit with numeric values the following variables in the *run_all.sh* file:
+Edit with numeric values the following variables in the *run_all_by_size.sh* file:
 
-- REPETITIONS: Number of times the same test is repeated to obtain response times
-- THREADS: List of values ​​that represent how many processing threads will be used in each test
-- DATASETS: List that defines the data sets that will be used in the tests. You can use the following values: 5, 20, 50, 100, 500 and full
+- REPETITIONS: Number of times the same test is repeated to obtain response times. Default: 3.
+- THREADS: List of values ​​that represent how many processing threads will be used in each test. Default: 8.
+- DATASETS: *This variable does not have to be modified*. List that defines the data sets sizes (MB) that will be used in the tests. Datasets of sizes 1, 10, 100, 500, 1000, 1500 and 2000 MB are always used.
 
-## Run
+## Run Benchmarck
 
-Use './run_all.sh' to run benchmarks
+Use './run_all_by_size.sh' to run benchmarks
+
+## Results
+
+Once the benchmarks have been run, the following TSV files will be generated:
+
+- results_benchmark_by_size.tsv
+- results_benchmark_by_number_of_combinations.tsv
+
+These files will contain the times in milliseconds that each algorithm took to perform the tests. The results are in turn classified by the method used, the number of threads, the dataset used and the number of combinations evaluated.
+
+## Analysis of Results
+
+TODO: Describe the analysis that will be performed in Excel, Python, R or wherever it is done
