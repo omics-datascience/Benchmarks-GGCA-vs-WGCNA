@@ -13,10 +13,14 @@ DATASET_1=$3
 DATASET_2=$4
 
  # Run GGCA tests
-for VERSION in base opt-1 opt-2 opt-3 opt-4 opt-7
+for VERSION in base opt-1 opt-2 opt-3 opt-4 opt-7 opt-8
 do
 	cd $VERSION
-	cargo build --example $PROGRAM_NAME --no-default-features --release -q
+	if [ "$VERSION" == "opt-8" ]; then
+		cargo build --example $PROGRAM_NAME --release -q
+	else
+		cargo build --example $PROGRAM_NAME --no-default-features --release -q
+	fi
 
 	for ((i=1; i<=$REPETITIONS; i++))
 	do
@@ -29,6 +33,6 @@ done
 # Run WGCNA
 for ((i=1; i<=$REPETITIONS; i++))
 do
-    Rscript --vanilla wgcna/wgcna.r $PROGRAM_NAME $THREADS "../datasets/$DATASET_1" "../datasets/$DATASET_2"
+    Rscript --vanilla --quiet wgcna/wgcna.r $PROGRAM_NAME $THREADS "../datasets/$DATASET_1" "../datasets/$DATASET_2"
 done
 

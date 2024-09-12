@@ -13,10 +13,14 @@ DATASET_1=$3
 DATASET_2=$4
 
  # Run tests
-for VERSION in base opt-1 opt-2 opt-3 opt-4
+for VERSION in base opt-1 opt-2 opt-3 opt-4 opt-8
 do
 	cd $VERSION
-	cargo build --example $PROGRAM_NAME --no-default-features --release -q
+	if [ "$VERSION" == "opt-8" ]; then
+		cargo build --example $PROGRAM_NAME --release -q
+	else
+		cargo build --example $PROGRAM_NAME --no-default-features --release -q
+	fi
 
 	for ((i=1; i<=$REPETITIONS; i++))
 	do

@@ -1,7 +1,11 @@
 #!/bin/bash
-REPETITIONS=3
+# REPETITIONS=3
+# THREADS=(8)
+# DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
+
+REPETITIONS=1
 THREADS=(8)
-DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
+DATASETS_SIZES=(1)
 
 FIXED_DATASET="TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed_5MB.tsv"
 
@@ -13,11 +17,11 @@ do
         cd ggca-opts
         echo "#Dataset" $DATASET_SIZE "MB - " $THREAD Threads
         echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET_SIZE-$THREAD.tsv"
-        echo "Corriendo Pearson..."
+        echo "Running Pearson..."
         bash run_pearson.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../$DATASET_SIZE-$THREAD.tsv"
-        echo "Corriendo Kendalls..."
+        echo "Running Kendalls..."
         bash run_kendalls.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../$DATASET_SIZE-$THREAD.tsv"
-        echo "Corriendo Spearman..."
+        echo "Running Spearman..."
         bash run_spearman.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../$DATASET_SIZE-$THREAD.tsv"
         cd ..
     done

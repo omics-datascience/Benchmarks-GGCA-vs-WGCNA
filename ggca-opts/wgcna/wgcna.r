@@ -2,7 +2,15 @@ suppressMessages({
   library("WGCNA")
   library("reshape2")
   library("data.table")
+  library("compiler")
+  library("future")
+  library("future.apply")
 })
+
+unnecessary_output <- capture.output({
+  enableJIT(3)
+})
+
 
 # Arg 1: method (single-pearson, single-spearman or single-kendall)
 # Arg 2: number of threads
@@ -16,7 +24,6 @@ threads = as.numeric(args[[2]])
 dataset1.gem.path = args[[3]]
 dataset2.gene.path = args[[4]]
 
-
 if(args[[1]] == "single-pearson"){
   method = "pearson"
 } else if (args[[1]] == "single-kendalls") {
@@ -27,6 +34,8 @@ if(args[[1]] == "single-pearson"){
   cat("args[[1]] should be one of “single-pearson”, “single-kendalls” or “single-spearman”")
 }
 
+# I specify that there are parts of code (specified with future_lapply) that run in parallel
+plan(multisession, workers = threads) 
 # Correlation_threshold or r.minimium value
 r.minimium=0.5
 # Method of adjusting the p-value. Possible options: "bonferroni", "holm", "hochberg", "hommel", "BH" (or its alias "fdr"), "BY"
@@ -47,6 +56,11 @@ SortMatrixByColumnName <- function(x, colsToExclude=0){
 gem.dataset <- readFile(dataset1.gem.path)
 gene.dataset <- readFile(dataset2.gene.path)
 
+row.names(gem.dataset)<-gem.dataset[,1]
+row.names(gene.dataset)<-gene.dataset[,1]
+gem.dataset<-gem.dataset[,2:ncol(gem.dataset)]
+gene.dataset<-gene.dataset[,2:ncol(gene.dataset)]
+
 ### Enable parallel processing for WCGNA Correlation
 unnecessary_output <- capture.output({
   th = enableWGCNAThreads(threads)
@@ -57,8 +71,8 @@ unnecessary_output <- capture.output({
 gem.dataset.transposed <-t(gem.dataset)
 gene.dataset.transposed <- t(gene.dataset)
 
-gem.dataset.transposed.numeric <-apply(gem.dataset.transposed, 2, as.numeric)
-gene.dataset.transposed.numeric <-apply(gene.dataset.transposed, 2, as.numeric)
+gem.dataset.transposed.numeric <- future_apply(gem.dataset.transposed, 2, as.numeric) 
+gene.dataset.transposed.numeric <- future_apply(gene.dataset.transposed, 2, as.numeric) 
 
 ptm <- proc.time()
 correlation.start <- proc.time()

@@ -6,6 +6,8 @@
     - [Downloading and processing the datasets](#downloading-and-processing-the-datasets)
       - [Changes in datasets](#changes-in-datasets)
   - [Description of response speed tests](#description-of-response-speed-tests)
+    - [Test 1: Using datasets of different sizes](#test-1-using-datasets-of-different-sizes)
+    - [Test 2: Using datasets with different number of combinations](#test-2-using-datasets-with-different-number-of-combinations)
   - [Configure benchmarks](#configure-benchmarks)
   - [Run Benchmarck](#run-benchmarck)
   - [Results](#results)
@@ -68,10 +70,6 @@ The script also automatically builds files of different sizes. These files will 
 
 ## Description of response speed tests
 
-For these tests, subsets of the downloaded USCS XENA datasets of different sizes are used. The datasets are created with the script mentioned in section ***.
-
-A fixed 5 MB dataset with transcription data is used and compared with datasets of different sizes with gene expression modulation data (methylation data). The sizes of these datasets are 1, 10, 100, 500, 1000, 1500 and 2000 MB.
-
 The tests consist of running the correlations using WGCNA and different GGCA optimizations.
 Both algorithms were configured as follows:
 
@@ -82,6 +80,15 @@ Both algorithms were configured as follows:
 The algorithms for performing the correlations were run with 3 different methods. Pearson, Kendalls and Spearman methods were used.
 
 The resulting times were measured in milliseconds and include the time taken to perform the correlations, to adjust the p values, to apply the correlation threshold and to retain the 10 best results.
+
+### Test 1: Using datasets of different sizes
+
+For these tests, subsets of the downloaded USCS XENA datasets of different sizes are used. The datasets are created with the script mentioned in section [Downloading and processing the datasets](#downloading-and-processing-the-datasets).  
+
+A fixed 5 MB dataset with transcription data is used and compared with datasets of different sizes with gene expression modulation data (methylation data). The sizes of these datasets are 1, 10, 100, 500, 1000, 1500 and 2000 MB.
+
+### Test 2: Using datasets with different number of combinations
+
 
 ## Configure benchmarks
 
