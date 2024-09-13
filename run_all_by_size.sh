@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 # REPETITIONS=3
 # THREADS=(8)
 # DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
@@ -6,6 +8,8 @@
 REPETITIONS=1
 THREADS=(8)
 DATASETS_SIZES=(1)
+
+export RUSTFLAGS="-L /usr/lib/python3.10/config-3.10-x86_64-linux-gnu -lpython3.10"
 
 FIXED_DATASET="TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed_5MB.tsv"
 

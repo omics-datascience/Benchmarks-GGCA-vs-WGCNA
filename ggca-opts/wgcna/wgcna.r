@@ -61,7 +61,7 @@ row.names(gene.dataset)<-gene.dataset[,1]
 gem.dataset<-gem.dataset[,2:ncol(gem.dataset)]
 gene.dataset<-gene.dataset[,2:ncol(gene.dataset)]
 
-### Enable parallel processing for WCGNA Correlation
+# Enable parallel processing for WCGNA Correlation
 unnecessary_output <- capture.output({
   th = enableWGCNAThreads(threads)
 })
@@ -111,4 +111,4 @@ resultado <- result.table[order(-correlation)][1:keep_top_n]
 
 # Elapsed time for calculation of collelation and adjustments:
 elapsed_time = (proc.time() - correlation.start)["elapsed"] * 1000
-cat(paste(method, "wgcna_R", threads, elapsed_time, paste(numGoodCorrelations,"/",numCorrelations, sep="") ,sep="\t"), "\n")
+cat(paste(args[[1]], "wgcna_R", threads, elapsed_time, paste(numGoodCorrelations,"/",numCorrelations, sep="") ,sep="\t"), "\n")

@@ -33,5 +33,5 @@ done
 # Run WGCNA
 for ((i=1; i<=$REPETITIONS; i++))
 do
-    Rscript --vanilla wgcna/wgcna.r $PROGRAM_NAME $THREADS "../datasets/$DATASET_1" "../datasets/$DATASET_2"
+    Rscript --vanilla --quiet wgcna/wgcna.r $PROGRAM_NAME $THREADS "../datasets/$DATASET_1" "../datasets/$DATASET_2"
 done

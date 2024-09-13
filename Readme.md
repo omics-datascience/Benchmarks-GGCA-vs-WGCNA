@@ -9,6 +9,7 @@
     - [Test 1: Using datasets of different sizes](#test-1-using-datasets-of-different-sizes)
     - [Test 2: Using datasets with different number of combinations](#test-2-using-datasets-with-different-number-of-combinations)
   - [Configure benchmarks](#configure-benchmarks)
+  - [Install Requirements](#install-requirements)
   - [Run Benchmarck](#run-benchmarck)
   - [Results](#results)
   - [Analysis of Results](#analysis-of-results)
@@ -97,6 +98,21 @@ Edit with numeric values the following variables in the *run_all_by_size.sh* fil
 - REPETITIONS: Number of times the same test is repeated to obtain response times. Default: 3.
 - THREADS: List of values ​​that represent how many processing threads will be used in each test. Default: 8.
 - DATASETS: *This variable does not have to be modified*. List that defines the data sets sizes (MB) that will be used in the tests. Datasets of sizes 1, 10, 100, 500, 1000, 1500 and 2000 MB are always used.
+
+## Install Requirements
+
+sudo apt install gfortran
+sudo apt install liblapack-dev
+sudo apt install libblas-dev
+sudo apt install libharfbuzz-dev
+sudo apt install libfribidi-dev
+sudo apt install libcurl4-openssl-dev
+sudo apt install libfontconfig1-dev
+sudo apt install libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev 
+
+```R
+  sudo Rscript requirements/requirements_r.r
+```
 
 ## Run Benchmarck
 
