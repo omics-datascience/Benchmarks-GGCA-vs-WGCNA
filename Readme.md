@@ -2,6 +2,12 @@
 
 - [Benchmarks GGCA vs WGCNA](#benchmarks-ggca-vs-wgcna)
   - [Introduction](#introduction)
+  - [Requirements](#requirements)
+    - [Programming languages](#programming-languages)
+    - [Libraries](#libraries)
+      - [GNU Scientific Library](#gnu-scientific-library)
+      - [R libraries](#r-libraries)
+      - [Python packages](#python-packages)
   - [Transcriptomic dataset](#transcriptomic-dataset)
     - [Downloading and processing the datasets](#downloading-and-processing-the-datasets)
       - [Changes in datasets](#changes-in-datasets)
@@ -9,7 +15,6 @@
     - [Test 1: Using datasets of different sizes](#test-1-using-datasets-of-different-sizes)
     - [Test 2: Using datasets with different number of combinations](#test-2-using-datasets-with-different-number-of-combinations)
   - [Configure benchmarks](#configure-benchmarks)
-  - [Install Requirements](#install-requirements)
   - [Run Benchmarck](#run-benchmarck)
   - [Results](#results)
   - [Analysis of Results](#analysis-of-results)
@@ -31,6 +36,40 @@ These measurements are obtained in two different ways:
 
 The datasets used and how to get them are described below. This is followed by a section detailing the tests performed.
 
+## Requirements
+
+### Programming languages
+
+- R version 4.4.1
+- Python version 3.10
+- Rustc version 1.81
+
+### Libraries
+
+#### GNU Scientific Library
+
+To run the benchmarks, you need to have The GNU Scientific Library (GSL) installed. To install, go to the requirements/gsl-latest/gsl-2.7.1 folder and see the INSTALL file for more detailed instructions. For more details see the README file inside the same folder.
+
+#### R libraries
+
+To install the R libraries, use the following bash script:
+
+``` bash
+cd requirements
+bash requirements_script.sh
+```
+
+NOTE: If you have any permissions problems with the installation of the R libraries, use sudo before the previous command.
+
+#### Python packages
+
+To install Python packages, use the following script:
+
+``` bash
+cd requirements
+pip3 install -r requirements_python.txt
+```
+
 ## Transcriptomic dataset
 
 We used real transcriptomic datasets to perform the correlations with the different algorithms. The [TCGA Breast Cancer (BRCA)](https://xenabrowser.net/datapages/?cohort=TCGA%20Breast%20Cancer%20(BRCA)&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443) data cohort obtained from UCSC XENA was used.
@@ -39,10 +78,6 @@ Specifically, a DNA methylation dataset (identifier [TCGA.BRCA.sampleMap/HumanMe
 ### Downloading and processing the datasets
 
 To download and process the datasets, install the necessary python requirements (python 3.10 is required):  
-
-``` python
-pip3 install -r requirements/requirements.txt
-```
 
 Then use the following bash script to download, unzip and process the datasets:
 
@@ -90,7 +125,6 @@ A fixed 5 MB dataset with transcription data is used and compared with datasets 
 
 ### Test 2: Using datasets with different number of combinations
 
-
 ## Configure benchmarks
 
 Edit with numeric values the following variables in the *run_all_by_size.sh* file:
@@ -98,21 +132,6 @@ Edit with numeric values the following variables in the *run_all_by_size.sh* fil
 - REPETITIONS: Number of times the same test is repeated to obtain response times. Default: 3.
 - THREADS: List of values ​​that represent how many processing threads will be used in each test. Default: 8.
 - DATASETS: *This variable does not have to be modified*. List that defines the data sets sizes (MB) that will be used in the tests. Datasets of sizes 1, 10, 100, 500, 1000, 1500 and 2000 MB are always used.
-
-## Install Requirements
-
-sudo apt install gfortran
-sudo apt install liblapack-dev
-sudo apt install libblas-dev
-sudo apt install libharfbuzz-dev
-sudo apt install libfribidi-dev
-sudo apt install libcurl4-openssl-dev
-sudo apt install libfontconfig1-dev
-sudo apt install libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev 
-
-```R
-  sudo Rscript requirements/requirements_r.r
-```
 
 ## Run Benchmarck
 
