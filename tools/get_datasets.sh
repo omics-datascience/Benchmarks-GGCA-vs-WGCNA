@@ -17,6 +17,9 @@ OUTPUT_GENE="TCGA.BRCA.sampleMap_HiSeqV2_PANCAN.gz"
 # Subdatasets sizes in MB
 DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
 
+# Subdatasets combinations numbers
+DATASETS_COMBINATIONS=(10 100 1000 10000 100000 1000000)
+
 echo "Downloading datasets..."
 curl -o "../datasets/$OUTPUT_GEM" "$URL_GEM"
 curl -o "../datasets/$OUTPUT_GENE" "$URL_GENES"
@@ -38,12 +41,22 @@ rm "../datasets/TCGA_BRCA_sampleMap_HumanMethylation450_clean"
 rm "../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean"
 
 echo -n "Assembling datasets of different sizes..."
+python3 data_subset_by_size_generator.py --input_file ../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed.tsv --size_mb 5
 for DATASET_SIZE in "${DATASETS_SIZES[@]}"
 do
     python3 data_subset_by_size_generator.py --input_file ../datasets/TCGA_BRCA_sampleMap_HumanMethylation450_clean_processed.tsv --size_mb $DATASET_SIZE
 done
-python3 data_subset_by_size_generator.py --input_file ../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed.tsv --size_mb 5
 echo "ok"
+
+echo -n "Assembling datasets of different number of combinations..."
+head -n 11 ../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed.tsv > ../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed_10_rows.tsv
+for DATASET_COMB in "${DATASETS_COMBINATIONS[@]}"
+do
+    COMB=$(($DATASET_COMB / 10))
+    head -n $(($COMB + 1)) ../datasets/TCGA_BRCA_sampleMap_HumanMethylation450_clean_processed.tsv > ../datasets/TCGA_BRCA_sampleMap_HumanMethylation450_clean_processed_${DATASET_COMB}_combinations.tsv
+done
+echo "ok"
+
 rm "../datasets/$OUTPUT_GEM"
 rm "../datasets/$OUTPUT_GENE"
 

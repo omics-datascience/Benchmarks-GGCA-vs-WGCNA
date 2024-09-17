@@ -1,0 +1,10 @@
+Algorithm	Optimization	Threads	Finished time (ms)	Combinations evaluated
+single-pearson	ggca_base	8	4	0/10
+single-pearson	ggca_base	8	1	0/10
+single-pearson	ggca_base	8	1	0/10
+single-pearson	ggca_opt-1	8	1	0/10
+single-pearson	ggca_opt-1	8	1	0/10
+single-pearson	ggca_opt-1	8	1	0/10
+single-pearson	ggca_opt-2	8	2	0/10
+single-pearson	ggca_opt-2	8	3	0/10
+single-pearson	ggca_opt-2	8	3	0/10

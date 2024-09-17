@@ -82,6 +82,7 @@ To download and process the datasets, install the necessary python requirements 
 Then use the following bash script to download, unzip and process the datasets:
 
 ``` bash
+cd tools
 ./get_datasets.sh
 ```
 
