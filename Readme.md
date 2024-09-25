@@ -18,6 +18,7 @@
   - [Run Benchmarck](#run-benchmarck)
   - [Results](#results)
   - [Analysis of Results](#analysis-of-results)
+  - [Time and memory measurements](#time-and-memory-measurements)
 
 ## Introduction
 
@@ -150,3 +151,11 @@ These files will contain the times in milliseconds that each algorithm took to p
 ## Analysis of Results
 
 TODO: Describe the analysis that will be performed in Excel, Python, R or wherever it is done
+
+## Time and memory measurements
+
+/usr/bin/time was used to measure memory. The following memory measurements were obtained:
+
+- Max resident memory: includes the maximum resident memory used by the main process and all its threads.
+- Total memory: includes the total memory used, which includes both the memory of the main process and that of all threads.
+- Unshared memory: refers to the memory that is not shared with other processes, that is, the memory that is exclusive to your process.
