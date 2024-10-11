@@ -40,7 +40,6 @@ do
     done
 done
 
-
 # RESULTS FOR TIME ARE COLLECTED INTO A SINGLE ORDERED TSV IN "RESULTS/TMP" FOLDER
 archivos=($(ls results/tmp | grep -E '[0-9]+-[0-9]+\.tsv$'))
 

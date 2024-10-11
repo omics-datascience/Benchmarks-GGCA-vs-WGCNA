@@ -1,13 +1,9 @@
 #!/bin/bash
 set -e
 
-# REPETITIONS=3
-# THREADS=(8)
-# DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
-
-REPETITIONS=2
-THREADS=(7 8)
-DATASETS_SIZES=(1 10)
+REPETITIONS=3
+THREADS=(4 6 8)
+DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
 
 export RUSTFLAGS="-L /usr/lib/python3.10/config-3.10-x86_64-linux-gnu -lpython3.10"
 
@@ -44,25 +40,24 @@ do
     done
 done
 
-
-# RESULTS ARE COLLECTED INTO A SINGLE ORDERED TSV
+# RESULTS FOR TIME ARE COLLECTED INTO A SINGLE ORDERED TSV IN "RESULTS/TMP" FOLDER
 archivos=($(ls results/tmp | grep -E '[0-9]+-[0-9]+\.tsv$'))
 
 header_written=false
 
 for archivo in "${archivos[@]}"; do
-  base_name=$(basename "results/tmp/$archivo" )
+  base_name=$(basename "results/tmp/$archivo")
   primer_string=$(echo "$base_name" | cut -d'-' -f1)
   
   while IFS= read -r line; do
     if [[ $header_written == false ]]; then
-      echo -e "Size of Dataset\t${line}" >> "$output"
+      echo -e "Size of Dataset\t${line}" >> "results/$result_for_time"
       header_written=true
     else
-      if [[ $line != $(head -n 1 "$archivo") ]]; then
-        echo -e "${primer_string} MB\t${line}" >> "$output"
+      if [[ $line != $(head -n 1 "results/tmp/$archivo") ]]; then
+        echo -e "${primer_string} MB\t${line}" >> "results/$result_for_time"
       fi
     fi
-  done < "$archivo"
-  rm -f $archivo
+  done < "results/tmp/$archivo"
+  rm -f results/tmp/$archivo
 done
