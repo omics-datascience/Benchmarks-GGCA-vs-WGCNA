@@ -5,51 +5,58 @@ set -e
 # THREADS=(8)
 # DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
 
-REPETITIONS=1
-THREADS=(8)
-DATASETS_SIZES=(1)
+REPETITIONS=2
+THREADS=(7 8)
+DATASETS_SIZES=(1 10)
 
 export RUSTFLAGS="-L /usr/lib/python3.10/config-3.10-x86_64-linux-gnu -lpython3.10"
 
 FIXED_DATASET="TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed_5MB.tsv"
 
+fecha_actual=$(date +%d_%m_%Y)
+result_for_time="time_results_benchmark_by_size_$fecha_actual.tsv"
+result_for_memory="memory_results_benchmark_by_size_$fecha_actual.tsv"
+export result_for_time
+export result_for_memory
+
 mkdir -p results/tmp
 rm -f results/tmp/*
+
+> "results/$result_for_time"
+echo -e "Number of Combinations\tAlgorithm\tOptimization\tThreads\tMax resident memory (KB)\tTotal memory (resident + virtual)(KB)\tUnshared memory (KB)\tpercent of CPU" > "results/$result_for_memory"
+
 for THREAD in "${THREADS[@]}"
 do
     for DATASET_SIZE in "${DATASETS_SIZES[@]}"
     do
+        export DS=$DATASET_SIZE
         DATASET="TCGA_BRCA_sampleMap_HumanMethylation450_clean_processed_${DATASET_SIZE}MB.tsv"
         cd ggca-opts
         echo "#Dataset" $DATASET_SIZE "MB - " $THREAD Threads
-        echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../$DATASET_SIZE-$THREAD.tsv"
+        echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../results/tmp/$DATASET_SIZE-$THREAD.tsv"
         echo "Running Pearson..."
-        bash run_pearson.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../$DATASET_SIZE-$THREAD.tsv"
+        bash run_pearson.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASET_SIZE-$THREAD.tsv"
         echo "Running Kendalls..."
-        bash run_kendalls.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../$DATASET_SIZE-$THREAD.tsv"
+        bash run_kendalls.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASET_SIZE-$THREAD.tsv"
         echo "Running Spearman..."
-        bash run_spearman.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../$DATASET_SIZE-$THREAD.tsv"
+        bash run_spearman.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASET_SIZE-$THREAD.tsv"
         cd ..
     done
 done
 
 
 # RESULTS ARE COLLECTED INTO A SINGLE ORDERED TSV
-fecha_actual=$(date +%d_%m_%Y)
-output="results_benchmark_by_size_$fecha_actual.tsv"
-> "$output"
-
-archivos=($(ls | grep -E '[0-9]+-[0-9]+\.tsv$'))
+archivos=($(ls results/tmp | grep -E '[0-9]+-[0-9]+\.tsv$'))
 
 header_written=false
 
 for archivo in "${archivos[@]}"; do
-  base_name=$(basename "$archivo" .tsv)
+  base_name=$(basename "results/tmp/$archivo" )
   primer_string=$(echo "$base_name" | cut -d'-' -f1)
   
   while IFS= read -r line; do
     if [[ $header_written == false ]]; then
-      echo -e "Dataset\t${line}" >> "$output"
+      echo -e "Size of Dataset\t${line}" >> "$output"
       header_written=true
     else
       if [[ $line != $(head -n 1 "$archivo") ]]; then

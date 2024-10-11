@@ -24,8 +24,8 @@ do
 
 	for ((i=1; i<=$REPETITIONS; i++))
 	do
-		/usr/bin/time -f "Max resident memory (KB)\t%M\nTotal memory (resident + virtual)(KB)\t%K\nUnshared memory (KB)\t%D" \
-		-o "../../results/tmp/$PROGRAM_NAME-$REPETITIONS-$THREADS-$VERSION.txt" -a \
+		/usr/bin/time -f "$DS\t$PROGRAM_NAME\t$VERSION\t$THREADS\t%M\t%K\t%D\t%P" \
+		-o "../../results/$result_for_memory" -a \
 		./target/release/examples/$PROGRAM_NAME $THREADS "../../datasets/$DATASET_1" "../../datasets/$DATASET_2"
 	done
 
@@ -35,8 +35,8 @@ done
 # Run WGCNA
 for ((i=1; i<=$REPETITIONS; i++))
 do
-	/usr/bin/time -f "Max resident memory (KB)\t%M\nTotal memory (resident + virtual)(KB)\t%K\nUnshared memory (KB)\t%D" \
-	-o "../results/tmp/$PROGRAM_NAME-$REPETITIONS-$THREADS-WGCNA.txt" -a \
+	/usr/bin/time -f "$DS\t$PROGRAM_NAME\tWGCNA\t$THREADS\t%M\t%K\t%D\t%P" \
+	-o "../results/$result_for_memory" -a \
     Rscript --vanilla --quiet wgcna/wgcna.r $PROGRAM_NAME $THREADS "../datasets/$DATASET_1" "../datasets/$DATASET_2"
 done
 
