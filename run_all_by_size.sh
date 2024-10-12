@@ -19,7 +19,7 @@ mkdir -p results/tmp
 rm -f results/tmp/*
 
 > "results/$result_for_time"
-echo -e "Number of Combinations\tAlgorithm\tOptimization\tThreads\tMax resident memory (KB)\tTotal memory (resident + virtual)(KB)\tUnshared memory (KB)\tpercent of CPU" > "results/$result_for_memory"
+echo -e "Size of Dataset (MB)\tAlgorithm\tOptimization\tThreads\tMax resident memory (KB)\tTotal memory (resident + virtual)(KB)\tUnshared memory (KB)\tpercent of CPU" > "results/$result_for_memory"
 
 for THREAD in "${THREADS[@]}"
 do
@@ -51,11 +51,11 @@ for archivo in "${archivos[@]}"; do
   
   while IFS= read -r line; do
     if [[ $header_written == false ]]; then
-      echo -e "Size of Dataset\t${line}" >> "results/$result_for_time"
+      echo -e "Size of Dataset (MB)\t${line}" >> "results/$result_for_time"
       header_written=true
     else
       if [[ $line != $(head -n 1 "results/tmp/$archivo") ]]; then
-        echo -e "${primer_string} MB\t${line}" >> "results/$result_for_time"
+        echo -e "${primer_string}\t${line}" >> "results/$result_for_time"
       fi
     fi
   done < "results/tmp/$archivo"

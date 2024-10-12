@@ -51,11 +51,11 @@ for archivo in "${archivos[@]}"; do
   
   while IFS= read -r line; do
     if [[ $header_written == false ]]; then
-      echo -e "Size of Dataset\t${line}" >> "results/$result_for_time"
+      echo -e "Number of Combinations\t${line}" >> "results/$result_for_time"
       header_written=true
     else
       if [[ $line != $(head -n 1 "results/tmp/$archivo") ]]; then
-        echo -e "${primer_string} MB\t${line}" >> "results/$result_for_time"
+        echo -e "${primer_string}\t${line}" >> "results/$result_for_time"
       fi
     fi
   done < "results/tmp/$archivo"
