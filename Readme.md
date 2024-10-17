@@ -88,7 +88,7 @@ cd tools
 
 This process will take several minutes, depending on your connection speed and hardware. The processed datasets will be stored inside the 'datasets' folder.  
 
-**Alternative**: If you do not want to download and process the datasets, you can download the dataset folder from [here](https://mega.nz/file/JAwjDaDJ#KLHVEqXLjtZpU06yv0F2D0UNMpWA8-LsHMvQmw-yQ6I). You will then need to unzip it into the root folder of the project.
+**Alternative**: If you do not want to download and process the datasets, you can download the dataset folder from [here](https://drive.google.com/file/d/1aKqm2aKNn4ndHZl5nfk6fm2O7eTulipF/view?usp=sharing). You will then need to unzip it into the project's root folder.
 
 #### Changes in datasets
 
