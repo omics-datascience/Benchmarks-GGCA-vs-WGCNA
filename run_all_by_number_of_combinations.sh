@@ -5,7 +5,7 @@ REPETITIONS=3
 THREADS=(4 6 8)
 DATASETS_COMBINATIONS=(10 100 1000 10000 100000 1000000)
 
-export RUSTFLAGS="-L /usr/lib/python3.10/config-3.10-x86_64-linux-gnu -lpython3.10"
+export RUSTFLAGS="-L /usr/local/lib/python3.10/config-3.10-x86_64-linux-gnu -lpython3.10"
 
 FIXED_DATASET="TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean_processed_10_rows.tsv"
 

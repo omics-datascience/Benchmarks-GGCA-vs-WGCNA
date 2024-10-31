@@ -88,7 +88,7 @@ colnames(cor.melt) <- c("x","y","correlation")
 # Filter rows with a correlation that does not meet the minimum required value
 cor.melt <- subset(cor.melt, abs(correlation) > r.minimium)
 
-# obtengo numero de correlaciones que pasan el umbral seteado
+# get number of correlations that pass the set threshold
 numGoodCorrelations <- length(cor.melt$correlation)
 
 #pvalue result into a dataframe
