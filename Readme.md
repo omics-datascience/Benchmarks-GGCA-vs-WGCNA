@@ -6,11 +6,11 @@
   - [Build Docker Image](#build-docker-image)
   - [Configure benchmarks](#configure-benchmarks)
     - [Downloading and processing the datasets](#downloading-and-processing-the-datasets)
+  - [Run Benchmarck](#run-benchmarck)
   - [Description of tests](#description-of-tests)
     - [Test 1: Using datasets of different sizes](#test-1-using-datasets-of-different-sizes)
     - [Test 2: Using datasets with different number of combinations](#test-2-using-datasets-with-different-number-of-combinations)
     - [Time and memory measurements](#time-and-memory-measurements)
-  - [Run Benchmarck](#run-benchmarck)
   - [Results](#results)
   - [Analysis of Results](#analysis-of-results)
 
@@ -19,8 +19,8 @@
 This benchmark measures the performance of 2 data correlation algorithms using transcriptomic data.
 The algorithms tested are:
 
-1. GGCA
-2. WGCNA
+1. [Gene GEM Correlation Analysis (GGCA)](https://docs.rs/ggca/latest/ggca/#)
+2. [Weighted Correlation Network Analysis (WGCNA)](https://cran.r-project.org/web/packages/WGCNA/index.html)
 
 The tests consist of measuring the performance of the algorithms by measuring their calculation speed and memory usage.
 
@@ -62,6 +62,16 @@ Replace *<datasets_folder>* with the previously created folder named **datasets*
 ```
 
 This process will take several minutes, depending on your connection speed and hardware. The processed datasets will be stored inside the 'datasets' folder.  
+
+## Run Benchmarck
+
+Use the following commands to run the benchmarks. Remember to change <datasets_folder> and <results_folder> in the commands to the respective **datasets** and **results** folders created previously.  
+
+Use `docker container run --rm -v <datasets_folder>:datasets -v <results_folder>:results ggca-vs-wgcna:latest benchmark-by-size` to run benchmarks using different sizes on the datasets.
+
+Use `docker container run --rm -v <datasets_folder>:datasets -v <results_folder>:results ggca-vs-wgcna:latest benchmark-by-combinations` to run benchmarks using different numbers of combinations on the datasets.
+
+IMPORTANT: These tests are going to take a long time!
 
 ## Description of tests
 
@@ -105,16 +115,6 @@ To obtain the test execution times we use:
 
 - For WGCNA: The R function called '*proc.time()*'.
 - For GGCA: The '*Instant::now()*' function from the Rust library called 'std::time::Instant'.
-
-## Run Benchmarck
-
-Use the following commands to run the benchmarks. Remember to change <datasets_folder> and <results_folder> in the commands to the respective **datasets** and **results** folders created previously.  
-
-Use `docker container run --rm -v <datasets_folder>:datasets -v <results_folder>:results ggca-vs-wgcna:latest benchmark-by-size` to run benchmarks using different sizes on the datasets.
-
-Use `docker container run --rm -v <datasets_folder>:datasets -v <results_folder>:results ggca-vs-wgcna:latest benchmark-by-combinations` to run benchmarks using different numbers of combinations on the datasets.
-
-IMPORTANT: These tests are going to take a long time!
 
 ## Results
 
