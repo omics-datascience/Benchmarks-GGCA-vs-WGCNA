@@ -48,8 +48,6 @@ Create 2 local folders called **datasets** and **results**. For example:
   mkdir ~/results
 ```
 
-**NOTE:** If for some reason you would like to change your test setup so that you are testing with fewer combinations or sizes, fewer repetitions, or fewer processing threads, you must edit the REPETITIONS, THREADS, DATASETS_SIZES, and DATASETS_COMBINATIONS variables. These are located at the top of the *run_all_by_size.sh* and *run_all_by_number_of_combinations.sh* files. Then you will need to build the Docker image again.  
-
 ### Downloading and processing the datasets
 
 We used real transcriptomic and methylation datasets to perform the correlations with the different algorithms. The datasets used and the processing performed are detailed in the document [Changes in datasets](Changes%20in%20datasets.md).  
@@ -92,6 +90,8 @@ A fixed 5 MB dataset with transcription data is used and compared with datasets 
 For these tests, subsets of the downloaded USCS XENA datasets are used, adjusted in such a way as to obtain different numbers of combinations to be evaluated. The datasets are created with the command mentioned in the section [Downloading and processing the datasets](#downloading-and-processing-the-datasets).
 
 A fixed dataset of 10 records with transcription data is used and compared with datasets of different numbers of records with gene expression modulation data (methylation data). The number of records in these different datasets are 1, 10, 100, 1000, 10000 and 100000 records, such that the algorithms will finally evaluate the following combinations in each test: 10, 100, 1000, 10000, 100000 and 1000000 combinations.
+
+**NOTE:** If for some reason you would like to change your test setup so that you are testing with fewer combinations or sizes, fewer repetitions, or fewer processing threads, you must edit the REPETITIONS, THREADS, DATASETS_SIZES, and DATASETS_COMBINATIONS variables. These are located at the top of the *run_all_by_size.sh* and *run_all_by_number_of_combinations.sh* files. Then you will need to build the Docker image again.  
 
 #### Time and memory measurements
 
