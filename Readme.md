@@ -9,7 +9,7 @@
   - [Description of tests](#description-of-tests)
     - [Test 1: Using datasets of different sizes](#test-1-using-datasets-of-different-sizes)
     - [Test 2: Using datasets with different number of combinations](#test-2-using-datasets-with-different-number-of-combinations)
-      - [Time and memory measurements](#time-and-memory-measurements)
+    - [Time and memory measurements](#time-and-memory-measurements)
   - [Run Benchmarck](#run-benchmarck)
   - [Results](#results)
   - [Analysis of Results](#analysis-of-results)
@@ -93,7 +93,7 @@ A fixed dataset of 10 records with transcription data is used and compared with 
 
 **NOTE:** If for some reason you would like to change your test setup so that you are testing with fewer combinations or sizes, fewer repetitions, or fewer processing threads, you must edit the REPETITIONS, THREADS, DATASETS_SIZES, and DATASETS_COMBINATIONS variables. These are located at the top of the *run_all_by_size.sh* and *run_all_by_number_of_combinations.sh* files. Then you will need to build the Docker image again.  
 
-#### Time and memory measurements
+### Time and memory measurements
 
 */usr/bin/time* was used to measure memory. The following memory measurements were obtained:
 
