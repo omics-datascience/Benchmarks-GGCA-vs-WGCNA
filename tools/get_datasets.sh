@@ -35,7 +35,7 @@ awk '{initial_value=$2; for(i=3;i<NF;i++) if($i != initial_value) {print; next}}
 rm "../datasets/TCGA_BRCA_sampleMap_HumanMethylation450"
 rm "../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN"
 
-echo "processing raw datasets..."
+echo "Processing raw datasets..."
 python3 dataset_processing.py --dataset_1 ../datasets/TCGA_BRCA_sampleMap_HumanMethylation450_clean --dataset_2 ../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean
 rm "../datasets/TCGA_BRCA_sampleMap_HumanMethylation450_clean"
 rm "../datasets/TCGA_BRCA_sampleMap_HiSeqV2_PANCAN_clean"

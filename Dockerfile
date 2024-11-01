@@ -23,11 +23,8 @@ RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain $RUST_VER
 RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Install dependencies
-COPY requirements /requirements
-WORKDIR /requirements
-
 # Install GSL
+COPY requirements/gsl-latest /gsl-latest
 RUN cd gsl-latest/gsl-2.7.1 && ./configure && make && make install
 RUN ldconfig
 
@@ -40,7 +37,8 @@ RUN R -e "install.packages('future')"
 RUN R -e "install.packages('future.apply')"
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements_python.txt
+COPY requirements_python.txt /requirements_python.txt
+RUN pip install --no-cache-dir -r /requirements_python.txt
 
 # Move the necessary files and folders within the container
 COPY ggca-opts /ggca-opts
