@@ -5,7 +5,7 @@
 - [Build Docker Image](#build-docker-image)
 - [Configure benchmarks](#configure-benchmarks)
   - [Downloading and processing the datasets](#downloading-and-processing-the-datasets)
-- [Run Benchmarck](#run-benchmarck)
+- [Run benchmark](#run-benchmark)
 - [Description of tests](#description-of-tests)
   - [Test 1: Using datasets of different sizes](#test-1-using-datasets-of-different-sizes)
   - [Test 2: Using datasets with different number of combinations](#test-2-using-datasets-with-different-number-of-combinations)
@@ -67,7 +67,7 @@ docker container run --rm -v ./datasets:/datasets ggca-vs-wgcna:latest download-
 This process will take several minutes, depending on your connection speed and hardware. The processed datasets will be stored inside the 'datasets' folder.  
 
 
-## Run Benchmarck
+## Run benchmarks
 
 Use the following commands to run the benchmarks: 
 
