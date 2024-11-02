@@ -37,7 +37,7 @@ RUN R -e "install.packages('future')"
 RUN R -e "install.packages('future.apply')"
 
 # Install Python dependencies
-COPY requirements_python.txt /requirements_python.txt
+COPY requirements/requirements_python.txt /requirements_python.txt
 RUN pip install --no-cache-dir -r /requirements_python.txt
 
 # Move the necessary files and folders within the container

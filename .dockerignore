@@ -1,3 +1,6 @@
 ggca-opts/**/target
 ggca-opts/**/venv
 ggca-opts/base/gsl-2.6.tar.gz
+datasets
+results
+.vscode
