@@ -7,6 +7,9 @@ suppressMessages({
   library("future.apply")
 })
 
+# Set the maximum size of global variables to prevent issues with large datasets
+options(future.globals.maxSize = 1024 * 1024 * 1024 * 2)  # 2 GB in bytes
+
 unnecessary_output <- capture.output({
   enableJIT(3)
 })
