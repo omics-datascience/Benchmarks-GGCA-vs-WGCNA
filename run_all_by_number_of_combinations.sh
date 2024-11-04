@@ -32,10 +32,10 @@ do
         echo -e "Algorithm\tOptimization\tThreads\tFinished time (ms)\tCombinations evaluated" >"../results/tmp/$DATASETS_COMB-$THREAD.tsv"
         echo "Running Pearson..."
         bash run_pearson.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASETS_COMB-$THREAD.tsv"
+        echo "Running Spearman..."
+        bash run_spearman.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASETS_COMB-$THREAD.tsv"        
         echo "Running Kendalls..."
         bash run_kendalls.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASETS_COMB-$THREAD.tsv"
-        echo "Running Spearman..."
-        bash run_spearman.sh $REPETITIONS $THREAD $DATASET $FIXED_DATASET >>"../results/tmp/$DATASETS_COMB-$THREAD.tsv"
         cd ..
     done
 done
