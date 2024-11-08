@@ -2,7 +2,7 @@
 set -e
 
 REPETITIONS=3
-THREADS=(4 6 8)
+THREADS=(1 2 4 6 8 10 12)
 DATASETS_SIZES=(1 10 100 500 1000 1500 2000)
 
 export RUSTFLAGS="-L /usr/local/lib/python3.10/config-3.10-x86_64-linux-gnu -lpython3.10"

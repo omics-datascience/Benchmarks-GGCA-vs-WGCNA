@@ -64,10 +64,15 @@ row.names(gene.dataset)<-gene.dataset[,1]
 gem.dataset<-gem.dataset[,2:ncol(gem.dataset)]
 gene.dataset<-gene.dataset[,2:ncol(gene.dataset)]
 
-# Enable parallel processing for WCGNA Correlation
-unnecessary_output <- capture.output({
-  th = enableWGCNAThreads(threads)
-})
+# Enable parallel processing for WCGNA Correlation (only if threads > 1)
+if (threads > 1) {
+  # Set the number of threads to be used by WGCNA
+  unnecessary_output <- capture.output({
+    th = enableWGCNAThreads(threads)
+  })
+} else {
+  th = 1
+}
 
 # cat(paste("Dataset", "Algorithm", "Optimization", "Threads", "Finished time (ms)", "Combinations evaluated",sep="\t"), "\n")
 # transpose matrix before correlation
